@@ -14,3 +14,7 @@ Copyright (C) 2013, David C. Merritt, david.c.merritt@siemens.com
 List and Description of Files
 =============================
 
+open_dwg_in_solid_edge.reg - open .dwg files in single instance of Solid Edge 
+
+open_dxf_in_solid_edge.reg - open .dxf files in single instance of Solid Edge 
+
