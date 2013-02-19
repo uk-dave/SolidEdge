@@ -18,3 +18,4 @@ open_dwg_in_solid_edge.reg - open .dwg files in single instance of Solid Edge
 
 open_dxf_in_solid_edge.reg - open .dxf files in single instance of Solid Edge 
 
+open_step_in_solid_edge.reg - open .step and .stp files in single instance of Solid Edge 
