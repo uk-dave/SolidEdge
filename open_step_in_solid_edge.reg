@@ -26,10 +26,21 @@ Windows Registry Editor Version 5.00
 ; Windows Explorer settings will launch multiple instances of Solid 
 ; Edge.
 ;
+; Note: This registry change will first remove any existing entires for
+; the .step and .stp file assocations.  It was found that certain 
+; existing applications that set various assocations for these file
+; types caused Solid Edge to hang unless they were first removed before
+; associating Soldi Edge to the .step and .stp file types.
+;
 ; ---------------------------------------------------------------------
 ;
 ; 19/02/2013  merritt  initial release
+; 19/02/2013  merritt  added keys to remove existing registry entries
 ;
+
+[-HKEY_CURRENT_USER\Software\Classes\.stp]
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.stp]
 
 [HKEY_CURRENT_USER\Software\Classes\.stp]
 @="SolidEdge.PartDocument"
@@ -43,6 +54,9 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.stp\OpenWithProgids]
 "SolidEdge.PartDocument"=hex(0):
 
+[-HKEY_CURRENT_USER\Software\Classes\.step]
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.step]
 
 [HKEY_CURRENT_USER\Software\Classes\.step]
 @="SolidEdge.PartDocument"
