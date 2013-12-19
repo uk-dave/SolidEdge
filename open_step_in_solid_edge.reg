@@ -21,21 +21,22 @@ Windows Registry Editor Version 5.00
 ; Registry script to set STEP .step and .stp files to open by default 
 ; into a single instance of Solid Edge.
 ;
-; Without this regsitry change simply setting the default behaviour on
+; Without this registry change simply setting the default behaviour on
 ; .step and/or .stp files to always open in Solid Edge through the 
 ; Windows Explorer settings will launch multiple instances of Solid 
 ; Edge.
 ;
-; Note: This registry change will first remove any existing entires for
-; the .step and .stp file assocations.  It was found that certain 
-; existing applications that set various assocations for these file
+; Note: This registry change will first remove any existing entries for
+; the .step and .stp file associations.  It was found that certain 
+; existing applications that set various associations for these file
 ; types caused Solid Edge to hang unless they were first removed before
-; associating Soldi Edge to the .step and .stp file types.
+; associating Solid Edge to the .step and .stp file types.
 ;
 ; ---------------------------------------------------------------------
 ;
 ; 19/02/2013  merritt  initial release
 ; 19/02/2013  merritt  added keys to remove existing registry entries
+; 18/12/2013  merritt  typos in header
 ;
 
 [-HKEY_CURRENT_USER\Software\Classes\.stp]

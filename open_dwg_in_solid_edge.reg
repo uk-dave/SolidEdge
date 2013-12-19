@@ -21,13 +21,14 @@ Windows Registry Editor Version 5.00
 ; Registry script to set AutoCAD .dwg files to open by default into a 
 ; single instance of Solid Edge.
 ;
-; Without this regsitry change simply setting the default behaviour on
+; Without this registry change simply setting the default behaviour on
 ; .dwg files to always open in Solid Edge through the Windows Explorer 
 ; settings will launch multiple instances of Solid Edge.
 ;
 ; ---------------------------------------------------------------------
 ;
 ; 06/02/2013  merritt  initial release
+; 18/12/2013  merritt  typos in header
 ;
 
 [HKEY_CURRENT_USER\Software\Classes\.dwg]
