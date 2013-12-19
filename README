@@ -24,4 +24,8 @@ open_inventor_in_solid_edge.reg - open .iam and .ipt files in single instance of
 
 open_step_in_solid_edge.reg - open .step and .stp files in single instance of Solid Edge 
 
-solid_edge_backing_store.reg - sets applicaton display to backing store
+solid_edge_backing_store.reg - sets application display to backing store
+
+superellipse.par - generate modifiable superellipse geometry using embedded table by curves 
+
+superellipse.xlsx - generate superellipse geometry data points for use in CAx programs
