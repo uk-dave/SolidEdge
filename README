@@ -16,6 +16,8 @@ List and Description of Files
 
 ChangeSolidEdgeStandard.ps1 - change Solid Edge modeling standard 
 
+clear_solid_edge_mru_list.reg - reset the Solid Edge MRU list
+
 open_dwg_in_solid_edge.reg - open .dwg files in single instance of Solid Edge 
 
 open_dxf_in_solid_edge.reg - open .dxf files in single instance of Solid Edge 
