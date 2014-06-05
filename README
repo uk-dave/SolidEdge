@@ -24,6 +24,8 @@ open_inventor_in_solid_edge.reg - open .iam and .ipt files in single instance of
 
 open_step_in_solid_edge.reg - open .step and .stp files in single instance of Solid Edge 
 
+ResetUserPreferences.ps1 - reset user's Solid Edge preferences
+
 solid_edge_backing_store.reg - sets application display to backing store
 
 solid_edge_default_modeling_order.reg - sets default modeling environment to ordered
