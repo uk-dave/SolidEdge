@@ -1,5 +1,5 @@
 # ChangeSolidEdgeStandard
-# Copyright (C) 2013, David C. Merritt, david.c.merritt@siemens.com
+# Copyright (C) 2014, David C. Merritt, david.c.merritt@siemens.com
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
