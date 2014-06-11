@@ -32,6 +32,7 @@
 #
 # 05/06/2014  merritt  initial release
 # 11/06/2014  merritt  corrected file name in comments
+# 11/06/2014  merritt added backticks to reg export cmd
 #
 
 <#
@@ -87,7 +88,7 @@ if ($Selected -eq "y")
     $RegFile = $env:temp + "\" + $BackupRoot + "\" + $Timestamp + "\user_se_registry.reg"    
     if (Test-Path "HKCU:\Software\Unigraphics Solutions")
     {
-        reg export "HKCU\Software\Unigraphics Solutions" "$RegFile" /y >$null
+        reg export `"HKCU\Software\Unigraphics Solutions`" `"$RegFile`" /y >$null
     }
     
     # display where we backed up to
