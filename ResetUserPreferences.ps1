@@ -1,4 +1,4 @@
-# ChangeSolidEdgeStandard
+# ResetUserPreferences
 # Copyright (C) 2014, David C. Merritt, david.c.merritt@siemens.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -31,6 +31,7 @@
 # ---------------------------------------------------------------------
 #
 # 05/06/2014  merritt  initial release
+# 11/06/2014  merritt  corrected file name in comments
 #
 
 <#
