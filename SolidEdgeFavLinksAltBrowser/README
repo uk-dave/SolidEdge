@@ -1,0 +1,57 @@
+SolidEdgeFavLinksAltBrowser
+===========================
+
+This folder contains files needed to implement a solution to open 
+Solid Edge favourite links on the Solid Edge startup page in an 
+alternative web browser other than the default Internet Explorer.
+
+All code is provided as is.  For more information please see the
+provided LICENSE file.
+
+Copyright (C) 2014 David C. Merritt, david.c.merritt@siemens.com
+
+Install
+=======
+
+1. Copy the SolidEdgeFavLinksAltBrowser folder to a location on your 
+computer i.e. C:\SolidEdgeFavLinksAltBrowser
+
+2. Using a text editor update the sample_links.reg file to point to 
+the location you copied the SolidEdgeFavLinksAltBrowser fodler in the
+previous step to.  Remember to \\ any \ in the folder path name.
+
+3. Install the sample_links.reg file updated in previous step by
+double-clicking on it.
+
+4. Install the allow_active_content_to_run.reg file by double-
+clicking on it.
+
+5. Install the allow_local_activex_without_prompt.reg file by
+double-clicking on it.
+
+6. Using a text editor update each of the .html files beginning with 
+"SolidEdge..." and update the "browserpath" location to point to the 
+location of your alternate web browser .exe file.  Review the 
+comments in these files for the correct syntax to follow for 
+specifying the "browserpath" location.
+
+7. Launch Solid Edge and select any of the Links on the start page.
+If everything is configured correctly, Internet Explorer should 
+briefly launch, then start your alternate web browser using the 
+specified link.
+
+
+Adding Additional Links
+=======================
+
+1. Copy one of the sample "SolidEdge*.html" files to an appropriate
+name for your link.
+
+2. Using a text editor update the "browserpath" and "urllink" 
+variables to the appropriate locations.  For the correct format to
+follow for setting these variables refer to the comments in the .html
+file.
+
+3. In Solid Edge update your Solid Edge Links to point to this .html 
+file.
+

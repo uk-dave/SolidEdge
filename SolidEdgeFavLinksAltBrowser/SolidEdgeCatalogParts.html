@@ -1,0 +1,81 @@
+﻿<!--
+ ************************************************************************
+ *
+ * SolidEdgeFavLinksAltBrowser
+ * Copyright (C) 2014, David C. Merritt, david.c.merritt@siemens.com
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ ************************************************************************
+ * 
+ * SolidEdgeFavLinksAltBrowser - a solution to open Solid Edge favourite 
+ * links on the Solid Edge startup page in an alternative web browser 
+ * other than the default Internet Explorer.
+ *  
+ * Sample html file used with the provided sample links registry
+ *
+ * You must modify the "browserpath" variable to point to the location of
+ * your alterntive web browser.
+ *
+ * Modify the "urllink" vaiable to point to the web address to open in your 
+ * web browser.
+ * 
+ ************************************************************************
+ * 
+ * 08/07/2014  merritt  initial release
+ * 
+ ************************************************************************
+-->
+<html>
+    <script>
+    // ************************************************************************
+    // modify below here
+    //
+    // browserpath = full path to your alternate web browser exe
+    //     path must be surrounded by " "
+    //     " character must be escaped with \
+    //     entire string must be surrounded by ' '
+    //     all \ in path must be double \\
+    //     browser exe path must end in a space between " and ' i.e.
+    //     '\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" ';
+    //
+    // urllink = the fulll hhttp addrss of the link you want to go to
+    //     path must be surrounded by " "
+    //     " character must be escaped with \
+    //     entire string must be surrounded by ' ' i.e.
+    //     '\"http://www.solidedge.com\"'
+    //
+    // ************************************************************************
+
+    var browserpath = '\"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe\" ';
+    var urllink = '\"http://www.siemens.com/plm/solidedgepartcommunity\"';
+    
+    // ************************************************************************
+    // modify above here
+    // ************************************************************************
+
+    function loadProg()
+    {
+        var fullcmd = browserpath + urllink;
+        var objShell  = new ActiveXObject("WScript.Shell");
+        objShell.Run(fullcmd);   
+        window.open("close_browser_tab.html", '_self');
+    }
+
+    window.onload = function()
+    {
+        loadProg();
+    }
+    </script>
+</html>
