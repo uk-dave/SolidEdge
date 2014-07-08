@@ -13,8 +13,8 @@ Copyright (C) 2014 David C. Merritt, david.c.merritt@siemens.com
 Install
 =======
 
-1. Copy the SolidEdgeFavLinksAltBrowser folder to a location on your 
-computer i.e. C:\SolidEdgeFavLinksAltBrowser
+1. Copy the SolidEdgeFavLinksAltBrowser folder and files in it to a 
+location on your computer i.e. C:\SolidEdgeFavLinksAltBrowser.
 
 2. Using a text editor update the sample_links.reg file to point to 
 the location you copied the SolidEdgeFavLinksAltBrowser fodler in the
