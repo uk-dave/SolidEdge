@@ -32,7 +32,8 @@
 #
 # 05/06/2014  merritt  initial release
 # 11/06/2014  merritt  corrected file name in comments
-# 11/06/2014  merritt added backticks to reg export cmd
+# 11/06/2014  merritt  added backticks to reg export cmd
+# 29/10/2014  merritt  cleaned up typos
 #
 
 <#
