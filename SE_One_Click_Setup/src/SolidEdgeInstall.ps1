@@ -31,6 +31,7 @@
 #
 # 14/07/2014  merritt  initial release
 # 29/10/2014  merritt  corrected typos in text
+# 11/11/2014  merritt  added auto copy of seadmin.exe
 #
 
 <#
@@ -523,6 +524,36 @@ if ($InsInstallerFull -ne "")
     }
 }
 
+# copy seadmin
+$host.ui.rawui.WindowTitle="Installing SEAdmin..."
+Write-Host
+Write-Host "    Installing SEAdmin..."
+$PathSeadmin = $InstallSolidEdge + "\SptTools\SEAdmin\SEAdmin.exe"
+
+# determine where solid edge automatically installed to
+$PathInstall = "C:\Program Files\Solid Edge ST7"
+$PathInstall = $PathInstall + "\Program\SEAdmin.exe"
+    
+if (Test-Path "$PathSeadmin")
+{
+    if ($DebugOff)
+    {
+        # install seadmin
+        Copy-Item $PathSeadmin $PathInstall
+    }
+    else
+    {
+        Write-Host
+        Write-Host "Copy-Item $PathSeadmin $PathInstall"
+        Write-Host
+    }
+}
+else
+{
+    Write-Host
+    Write-Host "    ERROR! Cannot locate SEAdmin.exe!"           
+}
+                
 # display our log files
 $host.ui.rawui.WindowTitle="Install of Solid Edge $SeVersion finished!"
 Write-Host
