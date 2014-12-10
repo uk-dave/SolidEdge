@@ -25,11 +25,19 @@ Windows Registry Editor Version 5.00
 ; .dxf files to always open in Solid Edge through the Windows Explorer 
 ; settings will launch multiple instances of Solid Edge.
 ;
+; Note: This registry change will first remove any existing entries for
+; the .dxf file associations.  
+;
 ; ---------------------------------------------------------------------
 ;
 ; 06/02/2013  merritt  initial release
 ; 18/12/2013  merritt  typos in header
+; 10/12/2014  merritt  added keys to remove existing registry entries
 ;
+
+[-HKEY_CURRENT_USER\Software\Classes\.dxf]
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dxf]
 
 [HKEY_CURRENT_USER\Software\Classes\.dxf]
 @="SolidEdge.DraftDocument"
