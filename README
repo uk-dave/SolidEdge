@@ -44,6 +44,10 @@ solid_edge_pdf_all_sheets.reg - set PDF Save As option to all sheets in draft
 
 solid_edge_pdf_one_sheet.reg - set PDF Save As option to one sheet in draft
 
+solid_edge_recent_documents_disabled.reg - disable Recent Documents button
+
+solid_edge_recent_documents_enabled.reg - enable Recent Documents button
+
 superellipse.par - generate modifiable superellipse geometry using embedded table by curves 
 
 superellipse.xlsx - generate superellipse geometry data points for use in CAx programs
