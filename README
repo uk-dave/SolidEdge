@@ -40,6 +40,8 @@ solid_edge_default_modeling_order.reg - sets default modeling environment to ord
 
 solid_edge_default_modeling_sync.reg - sets default modeling environment to synchronous
 
+solid_edge_keyboard_assignments.xlsx - default keyboard assignments by environment 
+
 solid_edge_pdf_all_sheets.reg - set PDF Save As option to all sheets in draft
 
 solid_edge_pdf_one_sheet.reg - set PDF Save As option to one sheet in draft
