@@ -7,7 +7,7 @@
 # (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY# without even the implied warranty of
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
@@ -37,6 +37,8 @@
 # 14/07/2014  merritt  added optional command line parameter passthru
 #                      added sanity check before uninstalling
 # 29/10/2014  merritt  corrected typos in text
+# 30/12/2014  merritt  corrected typos in GNU license agreement
+#                      corrected typos in user prompts
 #
 
 <#
@@ -142,7 +144,7 @@ while ($Selection -eq 0)
     if ($Backup -eq "")
     {
         Write-Host
-        $Selected = Read-Host -Prompt "    backup Solid Edge preferences? (Y/N)"
+        $Selected = Read-Host -Prompt "    Backup Solid Edge preferences? (Y/N)"
     }
     else
     {

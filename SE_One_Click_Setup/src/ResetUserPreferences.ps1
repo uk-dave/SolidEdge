@@ -7,7 +7,7 @@
 # (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY# without even the implied warranty of
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
@@ -35,6 +35,7 @@
 #                      added open win explorer window in debug mode
 #                      added optional command line parameter passthru
 # 29/10/2014  merritt  corrected typos in text
+# 30/12/2014  merritt  corrected typos in GNU license agreement
 #
 
 <#

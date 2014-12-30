@@ -7,7 +7,7 @@
 # (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY# without even the implied warranty of
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
@@ -32,6 +32,7 @@
 # 14/07/2014  merritt  initial release
 # 29/10/2014  merritt  corrected typos in text
 # 11/11/2014  merritt  added auto copy of seadmin.exe
+# 30/12/2014  merritt  corrected typos in GNU license agreement
 #
 
 <#
