@@ -65,7 +65,7 @@ echo.
 echo.
 
 set CHOICE_MENU=
-set /p CHOICE_MENU=       Enter option #: 
+set /p CHOICE_MENU=Enter option #: 
 echo.
 
 if not '%CHOICE_MENU%'=='' set CHOICE_MENU=%CHOICE_MENU:~0,1%
@@ -135,9 +135,13 @@ rem
 cls
 echo.
 echo     %SOFTWARE_NAME%: Installing...
+
 rem copy everything to our install folder
 xcopy "%SOFTWARE_DIR%*" "%INSTALL_DIR%" /h /e /i /r /y /d 
 cls
+
+rem set our powershell execution policy
+regedit /s "%SOFTWARE_DIR%registry\powershell_execution_policy.reg"
 
 rem copy our start menu shortcuts
 mkdir "%MENU_DIR%\%SOFTWARE_NAME%" 
@@ -149,7 +153,7 @@ rem install our registry shortcuts
 regedit /s "%SOFTWARE_DIR%registry\desktop_menu_install_%CHOICE_STD%.reg"
 regedit /s "%SOFTWARE_DIR%registry\desktop_menu_uninstall.reg"
 regedit /s "%SOFTWARE_DIR%registry\desktop_menu_user_reset.reg"
-regedit /s "%SOFTWARE_DIR%registry\win_exp_folder_menu_inst all_%CHOICE_STD%.reg"
+regedit /s "%SOFTWARE_DIR%registry\win_exp_folder_menu_install_%CHOICE_STD%.reg"
 regedit /s "%SOFTWARE_DIR%registry\win_exp_folder_menu_uninstall.reg"
 regedit /s "%SOFTWARE_DIR%registry\win_exp_folder_menu_user_reset.reg"
 cls
