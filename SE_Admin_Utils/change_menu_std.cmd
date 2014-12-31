@@ -31,6 +31,7 @@ title %SOFTWARE_NAME%: Change menu...
 
 rem set up some variables 
 for /f %%i in ("%0") do set SOFTWARE_DIR=%%~dpi
+set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
 
 rem
 rem Display our template menu
@@ -123,6 +124,7 @@ goto :ChangeStd
 set CHOICE_STD=ANSI_metric
 goto :ChangeStd
 
+
 rem
 rem finally install our software 
 rem
@@ -130,6 +132,9 @@ rem
 cls
 echo.
 echo     %SOFTWARE_NAME%: Changing Standards...
+
+rem check we can find our registry scripts in the current location
+if not exist "%SOFTWARE_DIR%registry" set SOFTWARE_DIR=%INSTALL_DIR%\
 
 rem install our registry shortcuts
 regedit /s "%SOFTWARE_DIR%registry\desktop_menu_install_%CHOICE_STD%.reg"
@@ -139,6 +144,10 @@ rem install should be complete so open our start menu and then exit
 title %SOFTWARE_NAME%: Menus updated!
 echo.
 echo     Solid Edge Admin Utils context menus have been updated!
+echo.
+echo.
+echo     Press any key to exit . . .
+pause > nul
 goto :CleanExit
 
 rem
@@ -149,4 +158,4 @@ set SOFTWARE_NAME=
 set SOFTWARE_DIR=
 set CHOICE_MENU=
 set CHOICE_STD=
-exit
+exit /b
