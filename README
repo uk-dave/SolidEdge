@@ -14,7 +14,7 @@ Copyright (C) 2013, 2014 David C. Merritt, david.c.merritt@siemens.com
 List and Description of Files
 =============================
 
-SE_One_Click_Setup - utilities to automate installing, uninstalling, and resetting Solid Edge 
+SE_Admin_Utils - utilities to automate installing, uninstalling, and resetting Solid Edge 
 
 SolidEdgeFavLinksAltBrowser - open Solid Edge Favorite links in alternate web browser
 
