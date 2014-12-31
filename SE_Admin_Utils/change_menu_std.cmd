@@ -138,6 +138,7 @@ if not exist "%SOFTWARE_DIR%registry" set SOFTWARE_DIR=%INSTALL_DIR%\
 
 rem install our registry shortcuts
 regedit /s "%SOFTWARE_DIR%registry\desktop_menu_install_%CHOICE_STD%.reg"
+regedit /s "%SOFTWARE_DIR%registry\win_exp_background_menu_install_%CHOICE_STD%.reg"
 regedit /s "%SOFTWARE_DIR%registry\win_exp_folder_menu_install_%CHOICE_STD%.reg"
 
 rem install should be complete so open our start menu and then exit
