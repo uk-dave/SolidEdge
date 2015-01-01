@@ -33,6 +33,7 @@
 # 29/10/2014  merritt  corrected typos in text
 # 11/11/2014  merritt  added auto copy of seadmin.exe
 # 30/12/2014  merritt  corrected typos in GNU license agreement
+# 31/12/2014  merritt  added check for existing Solid Edge installation
 #
 
 <#
@@ -78,6 +79,32 @@ $Timestamp = Get-Date -f yyyy-MM-dd_HH_mm_ss
 $LogRoot = "SolidEdge_Install"
 $PathLog = $env:temp + "\" + $LogRoot + "\" + $Timestamp
 New-Item $PathLog -ItemType directory -force >$null
+
+# find all Solid Edge software already installed
+$Software = @()
+
+# check for 64-bit software first
+$Software += Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -like "*Solid Edge*" -and $_.Publisher -eq "Siemens" } 
+
+# if no 64-bit then check for 32-bit
+if ( $Software.count -eq 0)
+{
+    $Software += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -like "*Solid Edge*" -and $_.Publisher -eq "Siemens" } 
+}
+
+# if Solid Edge found exit
+if ($Software.count -ne 0 -or $Software[0].DisplayName -ne $null)
+{
+    $LogFile = $PathLog + "\SolidEdge_uninstall.log"
+    New-Item $LogFile -type file -force -value "Solid Edge already installed!" >$null
+    Write-Host
+    Write-Host "    Solid Edge appears to be already installed!"
+    Write-Host
+    Write-Host "    Press any key to exit..."
+    $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    Write-Host
+    Exit
+}
 
 # enter our install media location
 $host.ui.rawui.WindowTitle="Select Solid Edge install media"
@@ -525,6 +552,79 @@ if ($InsInstallerFull -ne "")
     }
 }
 
+
+
+
+
+# find all Solid Edge software installed
+$Software = @()
+
+# check for 64-bit software first
+$Software += Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -like "*Solid Edge*" -and $_.Publisher -eq "Siemens" } 
+
+# if no 64-bit then check for 32-bit
+if ( $Software.count -eq 0)
+{
+    $Software += Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Where-Object { $_.DisplayName -like "*Solid Edge*" -and $_.Publisher -eq "Siemens" } 
+}
+
+# if no Solid Edge found exit
+if ($Software.count -eq 0 -or $Software[0].DisplayName -eq $null)
+{
+    $LogFile = $PathLog + "\SolidEdge_uninstall.log"
+    New-Item $LogFile -type file -force -value "Solid Edge not found!" >$null
+    Write-Host
+    Write-Host "    Solid Edge does not appear to be installed!"
+    Write-Host
+    Write-Host "    Press any key to exit..."
+    $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    Write-Host
+    Exit
+}
+
+# parse for the base Solid Edge software
+foreach ($item in $Software) 
+{ 
+    # get major versions and remove characters 107 -> 7, 117 -> 17
+    $Version = [string]$item.VersionMajor
+    $Version = $Version.SubString(1)
+    $Version = [int]$Version    
+    
+    # determine base Solid Edge install
+    $VersionName = "Solid Edge ST" + $Version    
+    if ($item.DisplayName -eq  $VersionName)
+    {
+        $PathInstall = $item.InstallLocation
+        $ProductCodeSe = $item.PSChildName
+        Write-Host
+        Write-Host "    $VersionName appears to be installed!"
+    }    
+}
+
+# if install path is empty check another registry
+if (!$PathInstall)
+{
+    $RegKey = "HKLM:\Software\Unigraphics Solutions\Solid Edge\Version " + $item.VersionMajor + "\CurrentVersion"
+    if (Test-Path $RegKey) 
+    {
+        $PathInstall = Get-ItemProperty -Path "$RegKey" -Name "InstallDir"
+        $PathInstall = $PathInstall.InstallDir 
+    }  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # copy seadmin
 $host.ui.rawui.WindowTitle="Installing SEAdmin..."
 Write-Host
@@ -532,7 +632,7 @@ Write-Host "    Installing SEAdmin..."
 $PathSeadmin = $InstallSolidEdge + "\SptTools\SEAdmin\SEAdmin.exe"
 
 # determine where solid edge automatically installed to
-$PathInstall = "C:\Program Files\Solid Edge ST7"
+#$PathInstall = "C:\Program Files\Solid Edge ST7"
 $PathInstall = $PathInstall + "\Program\SEAdmin.exe"
     
 if (Test-Path "$PathSeadmin")
