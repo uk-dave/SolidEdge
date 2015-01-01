@@ -34,6 +34,7 @@
 # 11/11/2014  merritt  added auto copy of seadmin.exe
 # 30/12/2014  merritt  corrected typos in GNU license agreement
 # 31/12/2014  merritt  added check for existing Solid Edge installation
+# 01/01/2015  merritt  added function to allow copying of license, etc.
 #
 
 <#
@@ -72,7 +73,7 @@ cls
 $host.ui.rawui.WindowTitle="Install Solid Edge"
 
 # set debug switch for testing code, set to 1 to do uninstall set to 0 to test
-$DebugOff = 1
+$DebugOff = 0
 
 # set up our install location for our log and backup files
 $Timestamp = Get-Date -f yyyy-MM-dd_HH_mm_ss
@@ -552,10 +553,6 @@ if ($InsInstallerFull -ne "")
     }
 }
 
-
-
-
-
 # find all Solid Edge software installed
 $Software = @()
 
@@ -576,10 +573,10 @@ if ($Software.count -eq 0 -or $Software[0].DisplayName -eq $null)
     Write-Host
     Write-Host "    Solid Edge does not appear to be installed!"
     Write-Host
-    Write-Host "    Press any key to exit..."
-    $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-    Write-Host
-    Exit
+    #Write-Host "    Press any key to exit..."
+    #$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    #Write-Host
+    #Exit
 }
 
 # parse for the base Solid Edge software
@@ -612,40 +609,24 @@ if (!$PathInstall)
     }  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # copy seadmin
 $host.ui.rawui.WindowTitle="Installing SEAdmin..."
 Write-Host
 Write-Host "    Installing SEAdmin..."
 $PathSeadmin = $InstallSolidEdge + "\SptTools\SEAdmin\SEAdmin.exe"
-
-# determine where solid edge automatically installed to
-#$PathInstall = "C:\Program Files\Solid Edge ST7"
-$PathInstall = $PathInstall + "\Program\SEAdmin.exe"
+$SeadminInstall = $PathInstall + "\Program\SEAdmin.exe"
     
 if (Test-Path "$PathSeadmin")
 {
     if ($DebugOff)
     {
         # install seadmin
-        Copy-Item $PathSeadmin $PathInstall
+        Copy-Item $PathSeadmin $SeadminInstall
     }
     else
     {
         Write-Host
-        Write-Host "Copy-Item $PathSeadmin $PathInstall"
+        Write-Host "Copy-Item $PathSeadmin $SeadminInstall"
         Write-Host
     }
 }
@@ -654,6 +635,25 @@ else
     Write-Host
     Write-Host "    ERROR! Cannot locate SEAdmin.exe!"           
 }
+                
+# copy any preferences, config files, etc.                
+$ScriptPath = split-path -parent $MyInvocation.MyCommand.Definition
+$ConfigPath = $ScriptPath + "\..\config_files"
+$ConfigFiles = Get-ChildItem -Path $ConfigPath -Recurse
+
+foreach ($File in $ConfigFiles) 
+{ 
+        $InstalledFiles = Get-ChildItem -Path $PathInstall -Recurse -Filter 
+        
+        foreach ($Found in $InstalledFiles) 
+        { 
+            Write-Host "    config - $Found"    
+        }
+}
+
+
+
+
                 
 # display our log files
 $host.ui.rawui.WindowTitle="Install of Solid Edge $SeVersion finished!"
