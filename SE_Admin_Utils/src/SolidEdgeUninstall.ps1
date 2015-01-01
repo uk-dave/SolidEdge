@@ -39,6 +39,7 @@
 # 29/10/2014  merritt  corrected typos in text
 # 30/12/2014  merritt  corrected typos in GNU license agreement
 #                      corrected typos in user prompts
+# 01/01/2015  merritt  added pause before deleting program folder
 #
 
 <#
@@ -320,13 +321,7 @@ if ($DebugOff)
 {
     # uninstall software
     Start-Process msiexec.exe $UninstallArgs -Wait
-            
-    # remove program folder
-    if (Test-Path "$PathInstall")
-    {
-        Remove-Item "$PathInstall" -force -recurse
-    }
-    
+              
     # remove registry keys 
     if (Test-Path "HKLM:\Software\Unigraphics Solutions")
     {
@@ -339,20 +334,27 @@ if ($DebugOff)
     if (Test-Path "HKLM:\Software\Wow6432Node\Unigraphics Solutions\Standard Parts") 
     {
         Remove-Item "HKLM:\Software\Wow6432Node\Unigraphics Solutions\Standard Parts" -force -recurse
-    }      
+    }  
+
+    # remove program folder
+    if (Test-Path "$PathInstall")
+    {
+        Start-Sleep -s 3
+        Remove-Item "$PathInstall" -force -recurse
+    }    
 }
 else
 {
     Write-Host
     Write-Host "Start-Process msiexec.exe $UninstallArgs -Wait"
     Write-Host
-    Write-Host "Remove-Item `"$PathInstall`" -force -recurse"
-    Write-Host
     Write-Host "Remove-Item `"HKLM:\Software\Unigraphics Solutions`" -force -recurse"
     Write-Host
     Write-Host "Remove-Item `"HKLM:\Software\Wow6432Node\Unigraphics Solutions\Solid Edge`" -force -recurse"
     Write-Host
     Write-Host "Remove-Item `"HKLM:\Software\Wow6432Node\Unigraphics Solutions\Standard Parts`" -force -recurse"
+    Write-Host
+    Write-Host "Remove-Item `"$PathInstall`" -force -recurse"
     Write-Host
 }
 
