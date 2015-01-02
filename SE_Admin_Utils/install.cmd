@@ -1,7 +1,7 @@
 @echo off
 
 rem install
-rem Copyright (C) 2014, David C. Merritt, david.c.merritt@siemens.com
+rem Copyright (C) 2014-2015, David C. Merritt, david.c.merritt@siemens.com
 rem
 rem This program is free software: you can redistribute it and/or modify
 rem it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@ rem ---------------------------------------------------------------------
 rem
 rem 31/12/2014  merritt  initial release
 rem 02/01/2014  merritt  added creation of custom_files folder
+rem                      moved start menu shortcuts to all users
 rem
 
 set SOFTWARE_NAME=Solid Edge Admin Utils
@@ -32,7 +33,7 @@ title %SOFTWARE_NAME%: Installing...
 rem set up some variables 
 for /f %%i in ("%0") do set SOFTWARE_DIR=%%~dpi
 set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
-set MENU_DIR=%APPDATA%\Microsoft\Windows\Start Menu\Programs
+set MENU_DIR=%ProgramData%\Microsoft\Windows\Start Menu\Programs
 
 rem check if our install folders already exist
 if exist "%INSTALL_DIR%" goto :ExistsError
