@@ -25,7 +25,8 @@ rem ---------------------------------------------------------------------
 rem
 rem 31/12/2014  merritt  initial release
 rem 02/01/2015  merritt  updated to run as compiled exe file
-rem                      addeed check if utils installed
+rem                      added check if utils installed
+rem                      removed press any key on successful change
 rem
 
 set SOFTWARE_NAME=Solid Edge Admin Utils
@@ -153,7 +154,7 @@ echo     Solid Edge Admin Utils context menus have been updated!
 echo.
 echo.
 echo     Press any key to exit . . .
-pause > nul
+rem pause > nul
 goto :CleanExit
 
 rem
