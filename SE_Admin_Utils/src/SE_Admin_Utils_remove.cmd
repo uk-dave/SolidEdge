@@ -1,7 +1,7 @@
 @echo off
 
 rem SE_Admin_Utils_remove
-rem Copyright (C) 2014, David C. Merritt, david.c.merritt@siemens.com
+rem Copyright (C) 2014-2015, David C. Merritt, david.c.merritt@siemens.com
 rem
 rem This program is free software: you can redistribute it and/or modify
 rem it under the terms of the GNU General Public License as published by
@@ -24,7 +24,8 @@ rem ---------------------------------------------------------------------
 rem
 rem 31/12/2014  merritt  initial release
 rem 02/01/2015  merritt  added warning about losing custom config files
-rem
+rem 02/01/2014  merritt  moved start menu shortcuts to all users
+rrem
 
 set SOFTWARE_NAME=Solid Edge Admin Utils
 title %SOFTWARE_NAME%: Uninstalling...
@@ -33,7 +34,7 @@ cls
 rem set up some variables 
 for /f %%i in ("%0") do set SOFTWARE_DIR=%%~dpi
 set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
-set MENU_DIR=%APPDATA%\Microsoft\Windows\Start Menu\Programs
+set MENU_DIR=%ProgramData%\Microsoft\Windows\Start Menu\Programs
 
 rem confirm removal
 echo.
