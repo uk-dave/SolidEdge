@@ -23,6 +23,7 @@ rem
 rem ---------------------------------------------------------------------
 rem
 rem 31/12/2014  merritt  initial release
+rem 02/01/2015  merritt  added warning about losing custom config files
 rem
 
 set SOFTWARE_NAME=Solid Edge Admin Utils
@@ -35,6 +36,10 @@ set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
 set MENU_DIR=%APPDATA%\Microsoft\Windows\Start Menu\Programs
 
 rem confirm removal
+echo.
+echo.
+echo     WARNING! This will also remove any custom config files added.
+echo. 
 echo.
 set /P CONFIRM=Are you sure you want to remove %SOFTWARE_NAME% (Y/N)? 
 if /i {%CONFIRM%}=={y} (goto :RemoveSoftware)
