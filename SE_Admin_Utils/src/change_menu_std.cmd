@@ -1,7 +1,7 @@
 @echo off
 
 rem change_menu_std
-rem Copyright (C) 2014, David C. Merritt, david.c.merritt@siemens.com
+rem Copyright (C) 2014-2015, David C. Merritt, david.c.merritt@siemens.com
 rem
 rem This program is free software: you can redistribute it and/or modify
 rem it under the terms of the GNU General Public License as published by
@@ -24,6 +24,8 @@ rem
 rem ---------------------------------------------------------------------
 rem
 rem 31/12/2014  merritt  initial release
+rem 02/01/2015  merritt  updated to run as compiled exe file
+rem                      addeed check if utils installed
 rem
 
 set SOFTWARE_NAME=Solid Edge Admin Utils
@@ -32,6 +34,9 @@ title %SOFTWARE_NAME%: Change menu...
 rem set up some variables 
 for /f %%i in ("%0") do set SOFTWARE_DIR=%%~dpi
 set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
+
+rem check if our install folders already exist
+if not exist "%INSTALL_DIR%" goto :ExistsError
 
 rem
 rem Display our template menu
@@ -145,6 +150,20 @@ rem install should be complete so open our start menu and then exit
 title %SOFTWARE_NAME%: Menus updated!
 echo.
 echo     Solid Edge Admin Utils context menus have been updated!
+echo.
+echo.
+echo     Press any key to exit . . .
+pause > nul
+goto :CleanExit
+
+rem
+rem display error for existing files 
+rem
+:ExistsError
+title %SOFTWARE_NAME%: ERROR!
+echo.
+echo.
+echo     Error: %SOFTWARE_NAME% does not appear to be installed!
 echo.
 echo.
 echo     Press any key to exit . . .
