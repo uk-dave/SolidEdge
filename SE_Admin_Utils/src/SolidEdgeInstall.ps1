@@ -73,7 +73,7 @@ cls
 $host.ui.rawui.WindowTitle="Install Solid Edge"
 
 # set debug switch for testing code, set to 1 to do uninstall set to 0 to test
-$DebugOff = 0
+$DebugOff = 1
 
 # set up our install location for our log and backup files
 $Timestamp = Get-Date -f yyyy-MM-dd_HH_mm_ss
@@ -94,7 +94,7 @@ if ( $Software.count -eq 0)
 }
 
 # if Solid Edge found exit
-if ($Software.count -ne 0 -or $Software[0].DisplayName -ne $null)
+if ($Software[0].DisplayName -ne $null)
 {
     $LogFile = $PathLog + "\SolidEdge_uninstall.log"
     New-Item $LogFile -type file -force -value "Solid Edge already installed!" >$null
@@ -571,12 +571,12 @@ if ($Software.count -eq 0 -or $Software[0].DisplayName -eq $null)
     $LogFile = $PathLog + "\SolidEdge_uninstall.log"
     New-Item $LogFile -type file -force -value "Solid Edge not found!" >$null
     Write-Host
-    Write-Host "    Solid Edge does not appear to be installed!"
+    Write-Host "    Solid Edge does not appear to have installed correctly!"
     Write-Host
-    #Write-Host "    Press any key to exit..."
-    #$x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-    #Write-Host
-    #Exit
+    Write-Host "    Press any key to exit..."
+    $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    Write-Host
+    Exit
 }
 
 # parse for the base Solid Edge software
@@ -635,25 +635,54 @@ else
     Write-Host
     Write-Host "    ERROR! Cannot locate SEAdmin.exe!"           
 }
-                
-# copy any preferences, config files, etc.                
+                    
+# copy any custom files, etc.   
+Write-Host
+Write-Host "    Copying custom files..."             
 $ScriptPath = split-path -parent $MyInvocation.MyCommand.Definition
-$ConfigPath = $ScriptPath + "\..\config_files"
-$ConfigFiles = Get-ChildItem -Path $ConfigPath -Recurse
+$CustomPath = $ScriptPath + "\..\custom_files"
+$CustomFiles = Get-ChildItem -Path $CustomPath -Recurse
 
-foreach ($File in $ConfigFiles) 
+# for each custom file attempt to find the its default install file and backup
+foreach ($File in $CustomFiles) 
 { 
-        $InstalledFiles = Get-ChildItem -Path $PathInstall -Recurse -Filter 
-        
+    # if config files found drop into our install
+    if ($File)
+    {
+        # check if an original installed file exists
+        $InstalledFiles = (Get-ChildItem -Path $PathInstall -Recurse -Filter $File).FullName
+     
         foreach ($Found in $InstalledFiles) 
-        { 
-            Write-Host "    config - $Found"    
+        {        
+            # if original found backup and overwrite else determine wehere to copy to
+            if ($Found)
+            {
+                # back up our original file
+                $Backup = $Found + "-org"
+                Copy-Item $Found $Backup
+                
+                # copy in our custom file
+                $CustomFile = $CustomPath + "\" + $File
+                Copy-Item $CustomFile $Found
+            }
+            else
+            {
+                # check if a Preferences folder exists and copy there else use Program folder
+                $DefaultFolder = $PathInstall + "\Preferences"
+              
+                if (-Not (Test-Path "$DefaultFolder"))
+                {
+                    $DefaultFolder = $PathInstall + "\Program"
+                }
+                $DefaultFile = $DefaultFolder + "\" + $File
+                
+                # copy in our custom file
+                $CustomFile = $CustomPath + "\" + $File
+                Copy-Item $CustomFile $DefaultFile
+            }
         }
+    }           
 }
-
-
-
-
                 
 # display our log files
 $host.ui.rawui.WindowTitle="Install of Solid Edge $SeVersion finished!"
