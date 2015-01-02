@@ -23,6 +23,7 @@ rem
 rem ---------------------------------------------------------------------
 rem
 rem 31/12/2014  merritt  initial release
+rem 02/01/2014  merritt  added creation of custom_files folder
 rem
 
 set SOFTWARE_NAME=Solid Edge Admin Utils
@@ -139,6 +140,9 @@ echo     %SOFTWARE_NAME%: Installing...
 rem copy everything to our install folder
 xcopy "%SOFTWARE_DIR%*" "%INSTALL_DIR%" /h /e /i /r /y /d 
 cls
+
+rem create our custom files folder
+if not exist "%INSTALL_DIR%\custom_files" mkdir "%INSTALL_DIR%\custom_files"
 
 rem set our powershell execution policy
 regedit /s "%SOFTWARE_DIR%registry\powershell_execution_policy.reg"
