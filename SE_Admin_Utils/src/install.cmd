@@ -23,17 +23,21 @@ rem
 rem ---------------------------------------------------------------------
 rem
 rem 31/12/2014  merritt  initial release
-rem 02/01/2014  merritt  added creation of custom_files folder
+rem 02/01/2015  merritt  added creation of custom_files folder
 rem                      moved start menu shortcuts to all users
+rem 06/01/2015  merritt  updated install to run as compiled exe file
 rem
 
 set SOFTWARE_NAME=Solid Edge Admin Utils
 title %SOFTWARE_NAME%: Installing...
 
 rem set up some variables 
-for /f %%i in ("%0") do set SOFTWARE_DIR=%%~dpi
+set SOFTWARE_DIR=%CD%
 set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
 set MENU_DIR=%ProgramData%\Microsoft\Windows\Start Menu\Programs
+
+rem change to our current dir 
+cd %SOFTWARE_DIR%
 
 rem check if our install folders already exist
 if exist "%INSTALL_DIR%" goto :ExistsError
@@ -139,31 +143,31 @@ echo.
 echo     %SOFTWARE_NAME%: Installing...
 
 rem copy everything to our install folder
-xcopy "%SOFTWARE_DIR%*" "%INSTALL_DIR%" /h /e /i /r /y /d 
+xcopy "%SOFTWARE_DIR%\*" "%INSTALL_DIR%" /h /e /i /r /y /d 
 cls
 
 rem create our custom files folder
 if not exist "%INSTALL_DIR%\custom_files" mkdir "%INSTALL_DIR%\custom_files"
 
 rem set our powershell execution policy
-regedit /s "%SOFTWARE_DIR%registry\powershell_execution_policy.reg"
+regedit /s "%SOFTWARE_DIR%\registry\powershell_execution_policy.reg"
 
 rem copy our start menu shortcuts
 mkdir "%MENU_DIR%\%SOFTWARE_NAME%" 
 ping 127.0.0.1 -n 2 > nul
-xcopy "%SOFTWARE_DIR%start_menu\*" "%MENU_DIR%" /h /e /i /r /y /d 
+xcopy "%SOFTWARE_DIR%\start_menu\*" "%MENU_DIR%" /h /e /i /r /y /d 
 cls
 
 rem install our registry shortcuts
-regedit /s "%SOFTWARE_DIR%registry\desktop_menu_install_%CHOICE_STD%.reg"
-regedit /s "%SOFTWARE_DIR%registry\desktop_menu_uninstall.reg"
-regedit /s "%SOFTWARE_DIR%registry\desktop_menu_user_reset.reg"
-regedit /s "%SOFTWARE_DIR%registry\win_exp_background_menu_install_%CHOICE_STD%.reg"
-regedit /s "%SOFTWARE_DIR%registry\win_exp_background_menu_uninstall.reg"
-regedit /s "%SOFTWARE_DIR%registry\win_exp_background_menu_user_reset.reg"
-regedit /s "%SOFTWARE_DIR%registry\win_exp_folder_menu_install_%CHOICE_STD%.reg"
-regedit /s "%SOFTWARE_DIR%registry\win_exp_folder_menu_uninstall.reg"
-regedit /s "%SOFTWARE_DIR%registry\win_exp_folder_menu_user_reset.reg"
+regedit /s "%SOFTWARE_DIR%\registry\desktop_menu_install_%CHOICE_STD%.reg"
+regedit /s "%SOFTWARE_DIR%\registry\desktop_menu_uninstall.reg"
+regedit /s "%SOFTWARE_DIR%\registry\desktop_menu_user_reset.reg"
+regedit /s "%SOFTWARE_DIR%\registry\win_exp_background_menu_install_%CHOICE_STD%.reg"
+regedit /s "%SOFTWARE_DIR%\registry\win_exp_background_menu_uninstall.reg"
+regedit /s "%SOFTWARE_DIR%\registry\win_exp_background_menu_user_reset.reg"
+regedit /s "%SOFTWARE_DIR%\registry\win_exp_folder_menu_install_%CHOICE_STD%.reg"
+regedit /s "%SOFTWARE_DIR%\registry\win_exp_folder_menu_uninstall.reg"
+regedit /s "%SOFTWARE_DIR%\registry\win_exp_folder_menu_user_reset.reg"
 cls
 
 rem install should be complete so open our start menu and then exit
