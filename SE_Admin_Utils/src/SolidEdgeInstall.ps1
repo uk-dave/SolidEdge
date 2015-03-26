@@ -35,6 +35,7 @@
 # 30/12/2014  merritt  corrected typos in GNU license agreement
 # 31/12/2014  merritt  added check for existing Solid Edge installation
 # 01/01/2015  merritt  added function to allow copying of license, etc.
+# 26/03/2015  merritt  added creation of %SE_HOME% environment variable 
 #
 
 <#
@@ -614,7 +615,7 @@ $host.ui.rawui.WindowTitle="Installing SEAdmin..."
 Write-Host
 Write-Host "    Installing SEAdmin..."
 $PathSeadmin = $InstallSolidEdge + "\SptTools\SEAdmin\SEAdmin.exe"
-$SeadminInstall = $PathInstall + "\Program\SEAdmin.exe"
+$SeadminInstall = $PathInstall + "Program\SEAdmin.exe"
     
 if (Test-Path "$PathSeadmin")
 {
@@ -635,6 +636,14 @@ else
     Write-Host
     Write-Host "    ERROR! Cannot locate SEAdmin.exe!"           
 }
+
+# set our SE_HOME environment variable 
+# this is useful so we can create shortcuts, menus etc 
+# that persist across multiple version installs and uninstalls
+$host.ui.rawui.WindowTitle="Setting SE_HOME..."
+Write-Host
+Write-Host "    Setting SE_HOME environment variable..."
+[Environment]::SetEnvironmentVariable("SE_HOME", $PathInstall, "Machine")
                     
 # copy any custom files, etc.   
 Write-Host
@@ -643,7 +652,7 @@ $ScriptPath = split-path -parent $MyInvocation.MyCommand.Definition
 $CustomPath = $ScriptPath + "\..\custom_files"
 $CustomFiles = Get-ChildItem -Path $CustomPath -Recurse
 
-# for each custom file attempt to find the its default install file and backup
+# for each custom file attempt to find its default install file and backup
 foreach ($File in $CustomFiles) 
 { 
     # if config files found drop into our install
