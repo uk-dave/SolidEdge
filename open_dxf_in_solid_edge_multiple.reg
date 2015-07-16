@@ -1,0 +1,72 @@
+Windows Registry Editor Version 5.00
+
+; open_dxf_in_solid_edge
+; Copyright (C) 2015, David C. Merritt, david.c.merritt@siemens.com
+;
+; This program is free software: you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation, either version 3 of the License, or
+; (at your option) any later version.
+;
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;
+; ---------------------------------------------------------------------
+;
+; Registry script to set AutoCAD .dxf files to open by default into  
+; multiple instances of Solid Edge.
+;
+; Note: This registry change will first remove any existing entries for
+; the .dxf file associations.  
+;
+; ---------------------------------------------------------------------
+;
+; 21/04/2015  merritt  initial release
+;
+
+[-HKEY_CURRENT_USER\Software\Classes\.dxf]
+
+[-HKEY_CURRENT_USER\Software\Classes\dxf_auto_file]
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dxf]
+
+[HKEY_CURRENT_USER\Software\Classes\.dxf]
+@="dxf_auto_file"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dxf]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dxf\OpenWithList]
+"a"="edge.exe"
+"MRUList"="a"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dxf\OpenWithProgids]
+"dxf_auto_file"=hex(0):
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dxf\UserChoice]
+"Progid"="dxf_auto_file"
+
+[HKEY_CURRENT_USER\Software\Classes\dxf_auto_file]
+@=""
+
+[HKEY_CURRENT_USER\Software\Classes\dxf_auto_file\shell]
+
+[HKEY_CURRENT_USER\Software\Classes\dxf_auto_file\shell\edit]
+
+[HKEY_CURRENT_USER\Software\Classes\dxf_auto_file\shell\edit\command]
+@="\"C:\\Program Files\\Solid Edge ST8\\Program\\Edge.EXE\" \"%1\""
+
+[HKEY_CURRENT_USER\Software\Classes\dxf_auto_file\shell\open]
+
+[HKEY_CURRENT_USER\Software\Classes\dxf_auto_file\shell\open\command]
+@="\"C:\\Program Files\\Solid Edge ST8\\Program\\Edge.EXE\" \"%1\""
+
+[HKEY_CURRENT_USER\Software\Classes\dxf_auto_file\shell\Read]
+
+[HKEY_CURRENT_USER\Software\Classes\dxf_auto_file\shell\Read\command]
+@="\"C:\\Program Files\\Solid Edge ST8\\Program\\Edge.EXE\" \"%1\""
+
