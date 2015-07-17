@@ -40,8 +40,8 @@ rem check if our install folders already exist
 if exist "%INSTALL_DIR%" goto :ExistsError
 if exist "%MENU_DIR%\%SOFTWARE_NAME%" goto :ExistsError
 
+rem everything okay so go to start install
 goto :InstallSoftware
-
 
 rem
 rem finally install our software 
@@ -65,7 +65,7 @@ xcopy "%SOFTWARE_DIR%\start_menu\*" "%MENU_DIR%" /h /e /i /r /y /d
 cls
 
 rem install our registry shortcuts
-rem regedit /s "%SOFTWARE_DIR%\registry\win_exp_folder_menu_user_reset.reg"
+regedit /s "%SOFTWARE_DIR%\registry\install_xml_context_menu.reg"
 cls
 
 rem install should be complete so open our start menu and then exit
@@ -101,6 +101,4 @@ set SOFTWARE_NAME=
 set SOFTWARE_DIR=
 set INSTALL_DIR=
 set MENU_DIR=
-set CHOICE_MENU=
-set CHOICE_STD=
 exit /b

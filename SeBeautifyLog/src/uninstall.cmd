@@ -48,17 +48,17 @@ echo     Error: %SOFTWARE_NAME% does not appear to be installed!
 echo.
 echo.
 echo     Press any key to exit . . .
-pause > nul
+rem pause > nul
 goto :CleanExit
 
 rem
 rem copy our uninstall file so we can then delete everything
 rem
 :NowRemove
-copy /y "%SOFTWARE_DIR%SE_Admin_Utils_remove.cmd" "%TEMP%\SE_Admin_Utils_remove.cmd" > nul
-copy /y "%INSTALL_DIR%\src\SE_Admin_Utils_remove.cmd" "%TEMP%\SE_Admin_Utils_remove.cmd" > nul
+copy /y "%SOFTWARE_DIR%SeBeautifyRemove.cmd" "%TEMP%\SeBeautifyRemove.cmd" > nul
+copy /y "%INSTALL_DIR%\src\SeBeautifyRemove.cmd" "%TEMP%\SeBeautifyRemove.cmd" > nul
 ping 127.0.0.1 -n 1 > nul
-if exist "%TEMP%\SE_Admin_Utils_remove.cmd" (start "" /D %TEMP% "%TEMP%\SE_Admin_Utils_remove.cmd")
+if exist "%TEMP%\SeBeautifyRemove.cmd" (start "" /D %TEMP% "%TEMP%\SeBeautifyRemove.cmd")
 goto :CleanExit
 
 rem

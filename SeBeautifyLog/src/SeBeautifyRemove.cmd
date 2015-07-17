@@ -1,7 +1,7 @@
 @echo off
 
-rem SE_Admin_Utils_remove
-rem Copyright (C) 2014-2015, David C. Merritt, david.c.merritt@siemens.com
+rem SeBeautifyRemove
+rem Copyright (C) 2015, David C. Merritt, david.c.merritt@siemens.com
 rem
 rem This program is free software: you can redistribute it and/or modify
 rem it under the terms of the GNU General Public License as published by
@@ -18,16 +18,14 @@ rem along with this program.  If not, see <http://www.gnu.org/licenses/>.
 rem
 rem ---------------------------------------------------------------------
 rem
-rem DOS script to remove the Solid Edge Admin Utils
+rem DOS script to remove the Solid Edge Beautify Log script
 rem
 rem ---------------------------------------------------------------------
 rem
 rem 31/12/2014  merritt  initial release
-rem 02/01/2015  merritt  added warning about losing custom config files
-rem 02/01/2014  merritt  moved start menu shortcuts to all users
-rrem
+rem
 
-set SOFTWARE_NAME=Solid Edge Admin Utils
+set SOFTWARE_NAME=Solid Edge Beautify Log
 title %SOFTWARE_NAME%: Uninstalling...
 cls
 
@@ -38,9 +36,6 @@ set MENU_DIR=%ProgramData%\Microsoft\Windows\Start Menu\Programs
 
 rem confirm removal
 echo.
-echo.
-echo     WARNING! This will also remove any custom config files added.
-echo. 
 echo.
 set /P CONFIRM=Are you sure you want to remove %SOFTWARE_NAME% (Y/N)? 
 if /i {%CONFIRM%}=={y} (goto :RemoveSoftware)
@@ -57,15 +52,7 @@ rem remove our registry shortcuts
 echo.
 echo         Removing context menu shortcuts...
 ping 127.0.0.1 -n 3 > nul
-regedit /s "%INSTALL_DIR%\registry\remove\remove_desktop_folder_menu_install.reg"
-regedit /s "%INSTALL_DIR%\registry\remove\remove_desktop_folder_menu_uninstall.reg"
-regedit /s "%INSTALL_DIR%\registry\remove\remove_desktop_menu_user_reset.reg"
-regedit /s "%INSTALL_DIR%\registry\remove\remove_win_exp_background_menu_install.reg"
-regedit /s "%INSTALL_DIR%\registry\remove\remove_win_exp_background_menu_uninstall.reg"
-regedit /s "%INSTALL_DIR%\registry\remove\remove_win_exp_background_menu_user_reset.reg"
-regedit /s "%INSTALL_DIR%\registry\remove\remove_win_exp_folder_menu_install.reg"
-regedit /s "%INSTALL_DIR%\registry\remove\remove_win_exp_folder_menu_uninstall.reg"
-regedit /s "%INSTALL_DIR%\registry\remove\remove_win_exp_folder_menu_user_reset.reg"
+regedit /s "%INSTALL_DIR%\registry\uninstall_xml_context_menu.reg"
 
 rem remove our menu shortcuts
 echo.
@@ -88,7 +75,7 @@ rem uninstall should be complete so open our start menu and then exit
 title %SOFTWARE_NAME%: Uninstalled!
 echo.
 echo.
-echo     Solid Edge Admin Utils has been uninstalled!
+echo     Solid Edge Beautify Log has been uninstalled!
 echo.
 if exist "%MENU_DIR%\%SOFTWARE_NAME%" (echo     Unable to remove all Start Menu files. Please delete manually.)
 if exist "%MENU_DIR%\%SOFTWARE_NAME%" (explorer "%MENU_DIR%\%SOFTWARE_NAME%")
