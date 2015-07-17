@@ -25,7 +25,8 @@ rem
 rem 31/12/2014  merritt  initial release
 rem 02/01/2015  merritt  added warning about losing custom config files
 rem 02/01/2014  merritt  moved start menu shortcuts to all users
-rrem
+rem 17/07/2015  merritt  corrected typo
+rem
 
 set SOFTWARE_NAME=Solid Edge Admin Utils
 title %SOFTWARE_NAME%: Uninstalling...
