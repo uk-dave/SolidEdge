@@ -1,0 +1,22 @@
+file formats
+
+dxf
+dwg
+dgn
+igs
+stp
+ifc
+x_t
+jt
+stl
+model (V4)
+catpart V5
+plmxml
+sat
+xgl
+PDF
+PDF (3D)
+Solid Edge Viewer
+bip (keyshot)
+u3d (universal 3D)
+bkm NX bookmark
