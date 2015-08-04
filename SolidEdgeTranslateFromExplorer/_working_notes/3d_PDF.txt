@@ -1,0 +1,24 @@
+SolidEdgeTranslationServices allows of output of pdf-3D since ST6 MP1
+Symptom
+---------------
+SolidEdgeTranslationServices.exe allows export in batch mode of Solid Edge
+files to different formats (pdf-2D, tif, dwg, jt, bmp, igs, etc.). Since ST6
+MP1 it is now also possible to convert to pdf-3D.
+Hardware/Software Configuration
+Solid Edge
+Solution
+Run 'SolidEdgeTranslationServices.exe' once.  The utility will create a new
+entry in the 'Define_SolidEdge_Properties_ForWorkflow_ToSync.ini' file found in
+the Solid Edge Program folder and by default is set to 0:
+
+Export 3D PDF from part or Assembly=0
+
+Edit the value to 1 to turn ON this functionality, this should cause the
+utility to output 3D pdf files of everything but SE draft files, when selecting
+the -t=pdf switch in the command line. e.g:
+
+SolidEdgeTranslationServices -i=C:\Siemens\part.par -o=C:\Siemens\part.pdf   
+-t=pdf
+
+
+http://solutions.industrysoftware.automation.siemens.com/view.php?si=002-7005345
