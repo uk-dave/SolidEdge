@@ -22,7 +22,8 @@ rem DOS script to install the Solid Edge Beautify Log script
 rem
 rem ---------------------------------------------------------------------
 rem
-rem 16/07/2014  merritt  initial release
+rem 16/07/2015  merritt  initial release
+rem 04/08/2015  merritt  added desktop shortcut
 rem
 
 set SOFTWARE_NAME=Solid Edge Beautify Log
@@ -32,6 +33,7 @@ rem set up some variables
 set SOFTWARE_DIR=%CD%
 set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
 set MENU_DIR=%ProgramData%\Microsoft\Windows\Start Menu\Programs
+set DESKTOP_DIR=%Public%\Desktop
 
 rem change to our current dir 
 cd %SOFTWARE_DIR%
@@ -62,6 +64,10 @@ rem copy our start menu shortcuts
 mkdir "%MENU_DIR%\%SOFTWARE_NAME%" 
 ping 127.0.0.1 -n 2 > nul
 xcopy "%SOFTWARE_DIR%\start_menu\*" "%MENU_DIR%" /h /e /i /r /y /d 
+cls
+
+rem copy our desktop shortcuts
+xcopy "%SOFTWARE_DIR%\desktop\*" "%DESKTOP_DIR%" /h /e /i /r /y /d 
 cls
 
 rem install our registry shortcuts

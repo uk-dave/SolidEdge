@@ -22,7 +22,8 @@ rem DOS script to remove the Solid Edge Beautify Log script
 rem
 rem ---------------------------------------------------------------------
 rem
-rem 31/12/2014  merritt  initial release
+rem 16/07/2015  merritt  initial release
+rem 04/08/2015  merritt  added desktop shortcut
 rem
 
 set SOFTWARE_NAME=Solid Edge Beautify Log
@@ -33,6 +34,7 @@ rem set up some variables
 for /f %%i in ("%0") do set SOFTWARE_DIR=%%~dpi
 set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
 set MENU_DIR=%ProgramData%\Microsoft\Windows\Start Menu\Programs
+set DESKTOP_DIR=%Public%\Desktop
 
 rem confirm removal
 echo.
@@ -57,7 +59,14 @@ regedit /s "%INSTALL_DIR%\registry\uninstall_xml_context_menu.reg"
 rem remove our menu shortcuts
 echo.
 echo         Removing Start menu shortcuts...
+ping 127.0.0.1 -n 5 > nul
 if exist "%MENU_DIR%\%SOFTWARE_NAME%" (rmdir /s /q "%MENU_DIR%\%SOFTWARE_NAME%" >nul)
+ping 127.0.0.1 -n 3 > nul
+
+rem remove our desktop shortcuts
+echo.
+echo         Removing desktop shortcuts...
+if exist "%DESKTOP_DIR%\%SOFTWARE_NAME%.lnk" (del /q "%DESKTOP_DIR%\%SOFTWARE_NAME%.lnk" >nul)
 ping 127.0.0.1 -n 3 > nul
 
 rem remove our install folder
