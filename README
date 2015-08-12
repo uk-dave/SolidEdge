@@ -34,6 +34,8 @@ open_step_in_solid_edge.reg - open .step and .stp files in single instance of So
 
 ResetUserPreferences.ps1 - reset user's Solid Edge preferences
 
+right_click_new_SE_all_in_win_explorer.reg - add Solid Edge files to Windows Explorer New menu
+
 solid_edge_backing_store.reg - sets application display to backing store
 
 solid_edge_default_modeling_order.reg - sets default modeling environment to ordered
