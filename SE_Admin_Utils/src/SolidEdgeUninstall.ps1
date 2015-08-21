@@ -40,6 +40,8 @@
 # 30/12/2014  merritt  corrected typos in GNU license agreement
 #                      corrected typos in user prompts
 # 01/01/2015  merritt  added pause before deleting program folder
+# 21/08/2015  merritt  added check if all parameters passed and if so 
+#                      use a gui yes/no 
 #
 
 <#
@@ -72,6 +74,9 @@ $host.ui.rawui.WindowTitle="Uninstall Solid Edge"
 
 # set debug switch for testing code, set to 1 to do uninstall set to 0 to test
 $DebugOff = 1
+
+# set our command line parameter switch
+$AllParametersPassed = 1
 
 # set up our uninstall location for our log and backup files
 $Timestamp = Get-Date -f yyyy-MM-dd_HH_mm_ss
@@ -144,6 +149,7 @@ while ($Selection -eq 0)
 {
     if ($Backup -eq "")
     {
+        $AllParametersPassed = 0
         Write-Host
         $Selected = Read-Host -Prompt "    Backup Solid Edge preferences? (Y/N)"
     }
@@ -168,6 +174,7 @@ while ($Selection -eq 0)
 {
     if ($ResetUser -eq "")
     {
+        $AllParametersPassed = 0
         Write-Host
         $Selected = Read-Host -Prompt "    Reset and backup current user's Solid Edge preferences? (Y/N)"
     }
@@ -190,27 +197,54 @@ $host.ui.rawui.WindowTitle="Starting Solid Edge uninstall..."
 $Selection = 0
 while ($Selection -eq 0)
 {
-    Write-Host
-    $SelectStr = "    Are you sure you want to uninstall " + $VersionName + "? (Y/N)"
-    $Selected = Read-Host -Prompt $SelectStr
-
-    # check a valid selection input
-    if (($Selected.Length -eq 1) -and (($Selected -eq "y") -or ($Selected -eq "n")))
+    if ($AllParametersPassed -eq 1)
     {
-        $Selection = 1
+        [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") | Out-Null
+        
+        $SelectStr = "    Are you sure you want to uninstall " + $VersionName + "?"
+        $Selected = [System.Windows.Forms.MessageBox]::Show($SelectStr , "Solid Edge Uninstall",[System.Windows.Forms.MessageBoxButtons]::YesNo,[System.Windows.Forms.MessageBoxIcon]::Question)
+
+        if ($Selected -eq "YES")
+        {
+            $Selected = "y"
+        }  
+        else
+        {
+            $Selected = "n"        
+        }
+        $Selection = 1        
+    }
+    else
+    {
+        Write-Host
+        $SelectStr = "    Are you sure you want to uninstall " + $VersionName + "? (Y/N)"
+        $Selected = Read-Host -Prompt $SelectStr
+
+        # check a valid selection input
+        if (($Selected.Length -eq 1) -and (($Selected -eq "y") -or ($Selected -eq "n")))
+        {
+            $Selection = 1
+        }
     }
 }
 
 if ($Selected -eq "n")
 { 
-    $host.ui.rawui.WindowTitle="Solid Edge uninstall cancelled!"
-    Write-Host
-    Write-Host "    Solid Edge uninstall cancelled."
-    Write-Host
-    Write-Host "    Press any key to exit..."
-    $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-    Write-Host
-    exit
+    if ($AllParametersPassed -eq 1)
+    {     
+        exit
+    }
+    else
+    {
+        $host.ui.rawui.WindowTitle="Solid Edge uninstall cancelled!"
+        Write-Host
+        Write-Host "    Solid Edge uninstall cancelled."
+        Write-Host
+        Write-Host "    Press any key to exit..."
+        $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+        Write-Host
+        exit
+    }
 }
 
 # backup the site preferences
