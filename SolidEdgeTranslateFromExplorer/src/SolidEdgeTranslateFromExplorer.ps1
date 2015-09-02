@@ -47,10 +47,10 @@ Author    : David C. Merritt (david.c.merritt@siemens.com)
 http://github.com/uk-dave/SolidEdge/SolidEdgeTranslateFromExplorer
 
 .PARAMETER Translate
-Required parameter to specify either a folder or single file to translate. Valid input is y or n. If not provided in the command line user will be prompted for this inline.
+Required parameter to specify either a folder or single file to translate.
 
 .PARAMETER Type
-Required parameter to specify the file type to export to. If not provided in the command line user will be prompted for this inline.
+Required parameter to specify the file type to export to.
 #>
 
 # set our input params
@@ -61,7 +61,7 @@ param(
 
 # set our title
 cls
-$host.ui.rawui.WindowTitle="Translate Solid Edge files"
+$host.ui.rawui.WindowTitle="Translating Solid Edge files..."
 
 # set some variables
 $LogRoot = "Solid_Edge_Win_Exp_Translate"
@@ -136,20 +136,14 @@ if (! (Test-Path "$Translator"))
     Exit
 }
 
-# check if a folder or file is passed to translate
-$Selection = 0
-while ($Selection -eq 0)
-{
-
+# check if a folder or file is passed to translate and get our files
 if (Test-Path $Translate -PathType Leaf)
 {
-    Write-Host "    Appears to be a file!"
-
+    $FileList = Get-Item $Translate
 }
 elseif (Test-Path $Translate -PathType Container)
 {
-    Write-Host "    Appears to be a folder!"
-
+    $FileList = Get-ChildItem $Translate -File
 }
 else
 {
@@ -162,6 +156,123 @@ else
     Exit
 }
 
+# check if a translation type is passed to translate
+$Type = $Type.ToLower()
+$ValidTypes = @("dwg", "dxf", "emf", "igs3d", "igs", "jt", "pdf", "pdf3d", "sat", "stp", "tif", "x_t" )
+if ($ValidTypes -contains $Type)
+{
+    #set if 2d=0 or 3d=1
+    switch ($Type)
+    {
+        "dwg"
+        {
+            $Format = 0
+            break
+        }
+        "dxf"
+        {
+            $Format = 0
+            break
+        }
+        "emf"
+        {
+            $Format = 0
+            break
+        }
+        "igs3d"
+        {
+            $Format = 1
+            $Type = "igs"
+            break
+        }
+        "igs"
+        {
+            $Format = 0
+            break
+        }
+        "jt"
+        {
+            $Format = 1
+            break
+        }
+        "pdf"
+        {
+            $Format = 0
+            break
+        }
+        "pdf3d"
+        {
+            $Format = 1
+            $Type = "pdf"
+            break
+        }
+        "sat"
+        {
+            $Format = 1
+            break
+        }         
+        "stp"
+        {
+            $Format = 1
+            break
+        }         
+        "tif"
+        {
+            $Format = 0
+            break
+        }       
+        "x_t"
+        {
+            $Format = 1
+            break
+        }       
+    }
+}
+else
+{
+    Write-Host
+    Write-Host "    No valid translation type provided!"
+    Write-Host
+    Write-Host "    Press any key to exit..."
+    $x = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+    Write-Host
+    Exit
 }
 
+# for each file check if a Solid Edge file and translate
+$ValidFiles2D = @(".dft")
+$ValidFiles= @(
+                (".dft"),
+                (".asm", ".par", ".psm")
+              )
+foreach ($File in $FileList) 
+{
+    if ($ValidFiles[$Format] -contains $File.Extension.ToLower())
+    {       
+        # build our output file name
+        $Output = $File.DirectoryName
+        $Output += "\" + $File.BaseName
+        $Output += "." + $Type
+        
+        # build our command line to execute
+        $CmdLine = ' -i="' + $File.FullName + '"'
+        $CmdLine += ' -o="' + $Output + '"'
+        $CmdLine += ' -t=' + $Type
+        $CmdLine += ' -r=1200' 
+        $CmdLine += ' -c=24' 
+        $CmdLine += ' -v=false' 
+        $CmdLine += ' -q=high' 
+        $CmdLine += ' -m=true' 
+        
+        # and finally execute our translation
+        $Text = "Translating to " + $Type.ToUpper() + ' "' + $File.FullName + '..."'
+        Write-Host
+        Write-Host $Text
+        Write-Host
+        Start-Process $Translator $CmdLine -Wait -WindowStyle Hidden
+    }
+ }
+
+
+ 
 Exit

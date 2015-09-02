@@ -20,3 +20,12 @@ Solid Edge Viewer
 bip (keyshot)
 u3d (universal 3D)
 bkm NX bookmark
+
+
+look at image files also e,g,
+
+tif
+bmp
+jpg
+wrl
+bip
