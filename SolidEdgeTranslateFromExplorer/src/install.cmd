@@ -25,12 +25,13 @@ rem
 rem 28/07/2014  merritt  initial release
 rem
 
+set SOFTWARE_BASENAME=DM Operations, Utilities, Spripts, & Essentials
 set SOFTWARE_NAME=Solid Edge Translate from Explorer
 title %SOFTWARE_NAME%: Installing...
 
 rem set up some variables 
 set SOFTWARE_DIR=%CD%
-set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_NAME%
+set INSTALL_DIR=%ProgramFiles%\%SOFTWARE_BASENAME%\%SOFTWARE_NAME%
 set MENU_DIR=%ProgramData%\Microsoft\Windows\Start Menu\Programs
 
 rem change to our current dir 
@@ -38,7 +39,7 @@ cd %SOFTWARE_DIR%
 
 rem check if our install folders already exist
 if exist "%INSTALL_DIR%" goto :ExistsError
-if exist "%MENU_DIR%\%SOFTWARE_NAME%" goto :ExistsError
+if exist "%MENU_DIR%\%SOFTWARE_BASENAME%\%SOFTWARE_NAME%" goto :ExistsError
 
 rem everything okay so go to start install
 goto :InstallSoftware
@@ -59,19 +60,23 @@ rem set our powershell execution policy
 regedit /s "%SOFTWARE_DIR%\registry\powershell_execution_policy.reg"
 
 rem copy our start menu shortcuts
-mkdir "%MENU_DIR%\%SOFTWARE_NAME%" 
+mkdir "%MENU_DIR%\%SOFTWARE_BASENAME%\%SOFTWARE_NAME%" 
 ping 127.0.0.1 -n 2 > nul
 xcopy "%SOFTWARE_DIR%\start_menu\*" "%MENU_DIR%" /h /e /i /r /y /d 
 cls
 
 rem install our registry shortcuts
-regedit /s "%SOFTWARE_DIR%\registry\install_xml_context_menu.reg"
+regedit /s "%SOFTWARE_DIR%\registry\install_asm_context_menu.reg"
+regedit /s "%SOFTWARE_DIR%\registry\install_dft_context_menu.reg"
+regedit /s "%SOFTWARE_DIR%\registry\install_directory_context_menu.reg"
+regedit /s "%SOFTWARE_DIR%\registry\install_par_context_menu.reg"
+regedit /s "%SOFTWARE_DIR%\registry\install_psm_context_menu.reg"
 cls
 
 rem install should be complete so open our start menu and then exit
 title %SOFTWARE_NAME%: Installed!
 echo.
-echo     Solid Edge Beautify Log has been installed!
+echo     %SOFTWARE_NAME% has been installed!
 explorer "%MENU_DIR%\%SOFTWARE_NAME%"
 goto :CleanExit
 
