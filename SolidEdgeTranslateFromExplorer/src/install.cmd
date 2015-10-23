@@ -25,7 +25,7 @@ rem
 rem 28/07/2014  merritt  initial release
 rem
 
-set SOFTWARE_BASENAME=DM Operations, Utilities, Spripts, & Essentials
+set SOFTWARE_BASENAME=DM Operations, Utilities, Scripts, & Extensions
 set SOFTWARE_NAME=Solid Edge Translate from Explorer
 title %SOFTWARE_NAME%: Installing...
 
