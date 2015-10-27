@@ -36,6 +36,8 @@ ResetUserPreferences.ps1 - reset user's Solid Edge preferences
 
 right_click_new_SE_all_in_win_explorer.reg - add Solid Edge files to Windows Explorer New menu
 
+SetLocks4SE.ahk - enforce toggling on Caps and Num locks within Solid Edge
+
 solid_edge_backing_store.reg - sets application display to backing store
 
 solid_edge_default_modeling_order.reg - sets default modeling environment to ordered
