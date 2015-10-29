@@ -16,6 +16,8 @@ List and Description of Files
 
 SE_Admin_Utils - utilities to automate installing, uninstalling, and resetting Solid Edge 
 
+SetLocksForSolidEdge - tool to enforce toggling Caps and Num locks on within Solid Edge
+
 SolidEdgeFavLinksAltBrowser - open Solid Edge Favorite links in alternate web browser
 
 ChangeSolidEdgeStandard.ps1 - change Solid Edge modeling standard 
