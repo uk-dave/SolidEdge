@@ -22,6 +22,10 @@
 ; ---------------------------------------------------------------------
 ;
 ; 28/10/2015  merritt  initial release
+; 29/10/2015  merritt  moved icon files to img sub-folder
+;                      relocated ini file to user LOCALAPPDATA
+;                      added check for and copy missing ini to user
+;                      created installer file 
 ;
 
 ; allow allow one instance, keyboard hook, and make persistent
@@ -29,13 +33,30 @@
 #Persistent
 #InstallKeybdHook
 
-; read in our ini file 
-IniRead, EnforceCapslock, SetLocksForSolidEdge.ini, EnforceLock, CapsLock, 1
-IniRead, EnforceNumLock, SetLocksForSolidEdge.ini, EnforceLock, NumLock, 1
-IniRead, DisplayTrayTip, SetLocksForSolidEdge.ini, DisplayTips, TrayTip, 1
-IniRead, DisplayToolTip, SetLocksForSolidEdge.ini, DisplayTips, ToolTip, 1
-IniRead, KeyPause, SetLocksForSolidEdge.ini, KeyControl, Pause, #p
-IniRead, KeyQuit, SetLocksForSolidEdge.ini, KeyControl, Exit, #q
+; ini file 
+EnvGet, UserIniDir, LOCALAPPDATA
+UserIniDir = %UserIniDir%\DM Operations, Utilities, Scripts, Extensions\Set Locks for Solid Edge
+UserIniFile = %UserIniDir%\SetLocksForSolidEdge.ini
+
+; check if user ini folder exists
+IfNotExist, %UserIniDir%
+{
+    FileCreateDir, %UserIniDir%
+}
+
+; check if user ini file exists
+IfNotExist, %UserIniFile%
+{
+    FileCopy, %A_ScriptDir%\SetLocksForSolidEdge.ini, %UserIniDir%
+}
+
+; read in our ini file
+IniRead, EnforceCapslock, %UserIniFile%, EnforceLock, CapsLock, 1
+IniRead, EnforceNumLock, %UserIniFile%, EnforceLock, NumLock, 1
+IniRead, DisplayTrayTip, %UserIniFile%, DisplayTips, TrayTip, 1
+IniRead, DisplayToolTip, %UserIniFile%, DisplayTips, ToolTip, 1
+IniRead, KeyPause, %UserIniFile%, KeyControl, Pause, #p
+IniRead, KeyQuit, %UserIniFile%, KeyControl, Exit, #q
 
 ; set up our pause and quit hot keys
 HotKey, %KeyPause%, PauseApp
@@ -43,7 +64,7 @@ HotKey, %KeyQuit%, QuitApp
 
 ; set our app name and tray icon data
 AppName=SetLocksForSolidEdge
-Menu, Tray, Icon, icon_caps_on_num_on.ico, 1, 1
+Menu, Tray, Icon, img\icon_caps_on_num_on.ico, 1, 1
 Menu, Tray, Tip, %AppName%
 
 ; set our paused tracking off
@@ -129,27 +150,27 @@ SetDisplayIcon(IconState, AppName)
 {
     if (IconState == -1)
     {
-        Menu, Tray, Icon, icon_pause.ico, 1, 1
+        Menu, Tray, Icon, img\icon_pause.ico, 1, 1
         Menu, Tray, Tip, %AppName%`nPaused
     }
     if (IconState == 0)
     {
-        Menu, Tray, Icon, icon_caps_off_num_off.ico, 1, 1
+        Menu, Tray, Icon, img\icon_caps_off_num_off.ico, 1, 1
         Menu, Tray, Tip, %AppName%`nCaps: Off`nNum: Off
     }
     if (IconState == 1)
     {
-        Menu, Tray, Icon, icon_caps_on_num_off.ico, 1, 1
+        Menu, Tray, Icon, img\icon_caps_on_num_off.ico, 1, 1
         Menu, Tray, Tip, %AppName%`nCaps: On`nNum: Off
     }
     if (IconState == 2)
     {
-        Menu, Tray, Icon, icon_caps_off_num_on.ico, 1, 1
+        Menu, Tray, Icon, img\icon_caps_off_num_on.ico, 1, 1
         Menu, Tray, Tip, %AppName%`nCaps: Off`nNum: On
     }
     if (IconState == 3)
     {
-        Menu, Tray, Icon, icon_caps_on_num_on.ico, 1, 1
+        Menu, Tray, Icon, img\icon_caps_on_num_on.ico, 1, 1
         Menu, Tray, Tip, %AppName%`nCaps: On`nNum: On
     }         
     Return
