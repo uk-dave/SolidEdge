@@ -36,6 +36,8 @@
 # 31/12/2014  merritt  added check for existing Solid Edge installation
 # 01/01/2015  merritt  added function to allow copying of license, etc.
 # 26/03/2015  merritt  added creation of %SE_HOME% environment variable 
+# 24/01/2017  merritt  added copying SDK to install
+#                      added check fro SEEC installer based on SE version
 #
 
 <#
@@ -292,11 +294,30 @@ if ($DataMgmt -ne 1)
 if ($DataMgmt -eq 2 -or $DataMgmt -eq 5)
 {  
     $ContinueCheck = 0
-    $InstallSeec = $InstallTop + "\Solid Edge Teamcenter Client"
+    
+    # check for SEEC install folder absed on SE version
+    if ($VersionNo -lt 9)
+    {
+        $InstallSeec = $InstallTop + "\Solid Edge Teamcenter Client"
+    }
+    else
+    {
+        $InstallSeec = $InstallTop + "\Teamcenter Integration for Solid Edge (SEEC)"
+    }
+    
     # test if .msi exists
     if (Test-Path "$InstallSeec")
     {
-        $FolderContent = Get-ChildItem -path "$InstallSeec" -name -filter "Solid Edge Teamcenter Client*.msi" 
+        # check for SEEC msi based on SE version
+        if ($VersionNo -lt 9)
+        {
+            $FolderContent = Get-ChildItem -path "$InstallSeec" -name -filter "Solid Edge Teamcenter Client*.msi" 
+        }
+        else
+        {
+            $FolderContent = Get-ChildItem -path "$InstallSeec" -name -filter "Teamcenter Integration for Solid Edge (SEEC)*.msi" 
+        }
+                 
         if ($FolderContent -eq "" -or $FolderContent -eq $null)
         {
             $ContinueCheck = 1
@@ -635,6 +656,32 @@ else
 {
     Write-Host
     Write-Host "    ERROR! Cannot locate SEAdmin.exe!"           
+}
+
+# copy SDK
+$host.ui.rawui.WindowTitle="Installing SDK..."
+Write-Host
+Write-Host "    Installing SDK..."
+$PathSdk = $InstallSolidEdge + "\..\SDK\*"
+$SdkInstall = $PathInstall + "SDK"
+if (Test-Path "$PathSdk")
+{
+    if ($DebugOff)
+    {
+        # install SDK
+        Copy-Item $PathSdk $SdkInstall -recurse
+    }
+    else
+    {
+        Write-Host
+        Write-Host "Copy-Item $PathSdk $SdkInstall"
+        Write-Host
+    }
+}
+else
+{
+    Write-Host
+    Write-Host "    ERROR! Cannot locate SDK!"           
 }
 
 # set our SE_HOME environment variable 

@@ -1,0 +1,67 @@
+Windows Registry Editor Version 5.00
+
+; open_parasolid_in_solid_edge
+; Copyright (C) 2017, David C. Merritt, david.c.merritt@siemens.com
+;
+; This program is free software: you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation, either version 3 of the License, or
+; (at your option) any later version.
+;
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;
+; ---------------------------------------------------------------------
+;
+; Registry script to set Parasolid .x_t and .x_b files to open by 
+; default into a single instance of Solid Edge.
+;
+; Without this registry change simply setting the default behaviour on
+; .x_t and .x_b files to always open in Solid Edge through the Windows 
+; Explorer settings will launch multiple instances of Solid Edge.
+;
+; Note: This registry change will first remove any existing entries for
+; the .x_t and .x_b file associations.  
+;
+; ---------------------------------------------------------------------
+;
+; 26/04/2017  merritt  initial release
+;
+
+[-HKEY_CURRENT_USER\Software\Classes\.x_t]
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.x_t]
+
+[HKEY_CURRENT_USER\Software\Classes\.x_t]
+@="SolidEdge.PartDocument"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.x_t]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.x_t\OpenWithList]
+"a"="Edge.exe"
+"MRUList"="a"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.x_t\OpenWithProgids]
+"SolidEdge.PartDocument"=hex(0):
+
+[-HKEY_CURRENT_USER\Software\Classes\.x_b]
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.x_b]
+
+[HKEY_CURRENT_USER\Software\Classes\.x_b]
+@="SolidEdge.PartDocument"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.x_b]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.x_b\OpenWithList]
+"a"="Edge.exe"
+"MRUList"="a"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.x_b\OpenWithProgids]
+"SolidEdge.PartDocument"=hex(0):
+
