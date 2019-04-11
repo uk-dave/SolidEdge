@@ -9,7 +9,7 @@ hope these may be of benefit to others in similar roles.
 All code is provided as is.  For more information please see the
 provided LICENSE file.
 
-Copyright (C) 2013 - 2018 David C. Merritt, david.c.merritt@siemens.com
+Copyright (C) 2013 - 2019 David C. Merritt, david.c.merritt@siemens.com
 
 List and Description of Files
 =============================
@@ -39,6 +39,8 @@ open_jt_in_solid_edge.reg - open .jt files in single instance of Solid Edge
 open_parasolid_in_solid_edge.reg - open .x_t and .x_b files in single instance of Solid Edge 
 
 open_step_in_solid_edge.reg - open .step and .stp files in single instance of Solid Edge 
+
+reset_solid_edge_extensions_SE2019 - reset the default Solid Edge SE2019 file extensions
 
 reset_solid_edge_extensions_ST8 - reset the default Solid Edge ST8 file extensions
 
@@ -72,7 +74,13 @@ solid_edge_recent_documents_disabled.reg - disable Recent Documents button
 
 solid_edge_recent_documents_enabled.reg - enable Recent Documents button
 
+solid_edge_software_driven.reg - set Application Display to software driven
+
+solid_edge_software_driven_pre-2019.reg - set Application Display to software driven pre-SE2019 
+
 SolidEdgeSetLanguage.cmd - set Solid Edge ST10 UI language 
+
+SolidEdgeSetLanguage_SE2019.cmd - set Solid Edge SE2019 UI language 
 
 superellipse.par - generate modifiable superellipse geometry using embedded table by curves 
 

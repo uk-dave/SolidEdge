@@ -1,5 +1,5 @@
 # ForceSolidEdgeCrash
-# Copyright (C) 2014-2015, David C. Merritt, david.c.merritt@siemens.com
+# Copyright (C) 2017, David C. Merritt, david.c.merritt@siemens.com
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -32,6 +32,9 @@
 # 07/08/2017  merritt  initial release
 # 08/08/2017  merritt  added manual exit
 # 08/08/2017  merritt  added code to always keep script window on top
+# 31/07/2018  merritt  updated to accommodate changes with SE2019 
+# 03/08/2018  merritt  added checks to exclude auxiliary software when
+#                      checking for installed software 
 #
 
 <#
@@ -103,13 +106,45 @@ if ($Software.count -eq 0 -or $Software[0].DisplayName -eq $null)
 # parse for the base Solid Edge software
 foreach ($item in $Software) 
 { 
+    # skip License Manager 
+    if ($item.Comments -like '*License*')
+    {
+        continue
+    }
+    
+    # skip Standard Parts 
+    if ($item.Comments -like '*Standard*')
+    {
+        continue
+    }
+
+    # skip Tech Pubs
+    if ($item.Comments -like '*Technical*')
+    {
+        continue
+    }
+
     # get major versions and remove characters 107 -> 7, 117 -> 17
     $VersionMajor = [string]$item.VersionMajor
-    $Version = $VersionMajor.SubString(1)
-    $Version = [int]$Version    
+
+    if ([int]$VersionMajor -gt 200)
+    {
+        $Version = $VersionMajor.SubString(1)
+        $Version = [int]$Version    
+        
+        $VersionName = "Siemens Solid Edge 20" + $Version 
+        $RegPath = "HKCU:\Software\Siemens\Solid Edge\Version " + $VersionMajor 
+    }
+    else
+    {
+        $Version = $VersionMajor.SubString(1)
+        $Version = [int]$Version    
+        
+        $VersionName = "Solid Edge ST" + $Version          
+        $RegPath = "HKCU:\Software\Unigraphics Solutions\Solid Edge\Version " + $VersionMajor 
+    }
     
     # determine base Solid Edge install folder
-    $VersionName = "Solid Edge ST" + $Version    
     if ($item.DisplayName -eq  $VersionName)
     {
         $PathInstall = $item.InstallLocation
@@ -122,8 +157,6 @@ foreach ($item in $Software)
 # set our debug registry switch
 Write-Host
 Write-Host "    Setting crash debug switch in registry..."
-
-$RegPath = "HKCU:\Software\Unigraphics Solutions\Solid Edge\Version " + $VersionMajor 
 $DebugPath = $RegPath + "\DEBUG"
 
 # check if our debug hive exists and if not create it
