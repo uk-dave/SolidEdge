@@ -40,6 +40,8 @@ open_parasolid_in_solid_edge.reg - open .x_t and .x_b files in single instance o
 
 open_step_in_solid_edge.reg - open .step and .stp files in single instance of Solid Edge 
 
+open_stl_in_solid_edge.reg - open .stl files in single instance of Solid Edge 
+
 reset_solid_edge_extensions_SE2019 - reset the default Solid Edge SE2019 file extensions
 
 reset_solid_edge_extensions_ST8 - reset the default Solid Edge ST8 file extensions
