@@ -56,6 +56,10 @@ ResetUserPreferences.ps1 - reset user's Solid Edge preferences
 
 right_click_new_SE_all_in_win_explorer.reg - add Solid Edge files to Windows Explorer New menu
 
+RunKeyShotRemoteDesktop.cmd - launch and run KeyShot in a remote desktop
+
+RunSolidEdgeRemoteDesktop.cmd - launch and run Solid Edge in a remote desktop
+
 SetLocks4SE.ahk - enforce toggling on Caps and Num locks within Solid Edge
 
 solid_edge_backing_store.reg - sets application display to backing store
