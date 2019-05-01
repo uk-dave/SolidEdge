@@ -55,6 +55,7 @@ rem
 rem ---------------------------------------------------------------------
 rem
 rem 30/04/2019  merritt  initial release
+rem 01/05/2019  merritt  added title to window
 rem
 
 
@@ -68,6 +69,9 @@ rem *******************************************************************
 rem Define the full command line to run the KeyShot exe file above here
 rem *******************************************************************
 
+
+rem set the window title
+title Start KeyShot from RDC
 
 rem set command line for tasklist.exe used to help identify our current desktop session id
 set IdentifySessionIdCmd=tasklist /FI "IMAGENAME eq tasklist.exe" /FO "TABLE" /NH
@@ -84,7 +88,6 @@ echo Please allow time for KeyShot to fully launch on the remote system.
 echo Then reconnect your Remote Desktop session and use KeyShot.
 echo.
 pause
-
 
 rem connect our remote session back to the running desktop console
 tscon %SessionId% /dest:console
