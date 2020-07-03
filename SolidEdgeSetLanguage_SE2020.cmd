@@ -24,6 +24,8 @@ rem
 rem ---------------------------------------------------------------------
 rem
 rem 29/08/2019  merritt  initial release
+rem 06/05/2020  merritt  added pause before starting Solid Edge 
+rem                      updated to SE2020 
 rem
 
 set SE_HOME=C:\Program Files\Siemens\Solid Edge 2020
@@ -178,6 +180,7 @@ reg add "HKLM\Software\Siemens\Solid Edge\Version 220\CurrentVersion" /v Install
 rem
 rem now launch Solid Edge 
 rem
+pause
 start "" "%SE_HOME%\Program\Edge.exe"
 goto :CleanExit
 
