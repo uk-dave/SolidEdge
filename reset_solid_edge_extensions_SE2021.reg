@@ -22,11 +22,11 @@ Windows Registry Editor Version 5.00
 ; For a single instance of Solid Edge.
 ;
 ; This script assumes the default Solid Edge install location - 
-; C:\Program Files\Siemens\Solid Edge 2021\Program\edge.exe
+; C:\Program Files\Siemens\Solid Edge 2021\Program\
 ;
 ; If you have installed to a different location perform a find and 
 ; replace on the following string (note the double back slashes) -
-; C:\\Program Files\\Siemens\\Solid Edge 2021\\Program\\edge.exe
+; C:\\Program Files\\Siemens\\Solid Edge 2021\\Program\\
 ;
 ; You should reboot your system after running this registry script.
 ;
@@ -44,6 +44,7 @@ Windows Registry Editor Version 5.00
 ; 03/07/2020  merritt  updated from SE2019 to SE2020
 ; 04/06/2021  merritt  updated from SE2020 to SE2021
 ;                      added note on default location 
+; 04/06/2021  merritt  updated/corrected comments
 ;
 
 ;
