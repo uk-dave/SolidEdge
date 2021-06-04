@@ -46,6 +46,8 @@ reset_solid_edge_extensions_SE2019 - reset the default Solid Edge SE2019 file ex
 
 reset_solid_edge_extensions_SE2020 - reset the default Solid Edge SE2020 file extensions
 
+reset_solid_edge_extensions_SE2021 - reset the default Solid Edge SE2021 file extensions
+
 reset_solid_edge_extensions_ST8 - reset the default Solid Edge ST8 file extensions
 
 reset_solid_edge_extensions_ST9 - reset the default Solid Edge ST9 file extensions
@@ -91,6 +93,8 @@ SolidEdgeSetLanguage.cmd - set Solid Edge ST10 UI language
 SolidEdgeSetLanguage_SE2019.cmd - set Solid Edge SE2019 UI language 
 
 SolidEdgeSetLanguage_SE2020.cmd - set Solid Edge SE2020 UI language 
+
+SolidEdgeSetLanguage_SE2021.cmd - set Solid Edge SE2021 UI language 
 
 superellipse.par - generate modifiable superellipse geometry using embedded table by curves 
 
