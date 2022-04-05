@@ -80,6 +80,10 @@ solid_edge_pdf_all_sheets.reg - set PDF Save As option to all sheets in draft
 
 solid_edge_pdf_one_sheet.reg - set PDF Save As option to one sheet in draft
 
+solid_edge_point_cloud_network_disable - disable importing point cloud from network
+
+solid_edge_point_cloud_network_enable - enable importing point cloud from network
+
 solid_edge_recent_documents_disabled.reg - disable Recent Documents button
 
 solid_edge_recent_documents_enabled.reg - enable Recent Documents button
