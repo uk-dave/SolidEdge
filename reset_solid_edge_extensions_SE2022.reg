@@ -1,0 +1,603 @@
+Windows Registry Editor Version 5.00
+
+; reset_solid_edge_extensions_SE2022
+; Copyright (C) 2022, David C. Merritt, david.c.merritt@siemens.com
+;
+; This program is free software: you can redistribute it and/or modify
+; it under the terms of the GNU General Public License as published by
+; the Free Software Foundation, either version 3 of the License, or
+; (at your option) any later version.
+;
+; This program is distributed in the hope that it will be useful,
+; but WITHOUT ANY WARRANTY; without even the implied warranty of
+; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+; GNU General Public License for more details.
+;
+; You should have received a copy of the GNU General Public License
+; along with this program.  If not, see <http://www.gnu.org/licenses/>.
+;
+; ---------------------------------------------------------------------
+;
+; Registry script to reset the default Solid Edge file extensions. 
+; For a single instance of Solid Edge.
+;
+; This script assumes the default Solid Edge install location - 
+; C:\Program Files\Siemens\Solid Edge 2022\Program\
+;
+; If you have installed to a different location perform a find and 
+; replace on the following string (note the double back slashes) -
+; C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\
+;
+; You should reboot your system after running this registry script.
+;
+; Note: This registry change will first remove any existing user 
+; entries for the Solid Edge file type associations.  
+;
+; ---------------------------------------------------------------------
+;
+; 04/08/2016  merritt  initial release
+; 30/08/2016  merritt  added .pwd type
+; 16/01/2017  merritt  updated from ST8 to ST9 
+; 21/03/2017  merritt  added back in missing .par extension
+; 19/08/2017  merritt  updated from ST9 to ST10 
+; 15/10/2018  merritt  updated from ST10 to SE2019 
+; 03/07/2020  merritt  updated from SE2019 to SE2020
+; 04/06/2021  merritt  updated from SE2020 to SE2021
+;                      added note on default location 
+; 04/06/2021  merritt  updated/corrected comments
+; 29/09/2022  merritt  updated from SE2021 to SE2022
+;
+
+;
+; clear existing user associations
+;
+
+; asm
+[-HKEY_CURRENT_USER\Software\Classes\.asm]
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.asm]
+
+; dft
+[-HKEY_CURRENT_USER\Software\Classes\.dft]
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.dft]
+
+; par
+[-HKEY_CURRENT_USER\Software\Classes\.par]
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.par]
+
+; psm
+[-HKEY_CURRENT_USER\Software\Classes\.psm]
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.psm]
+
+; pwd
+[-HKEY_CURRENT_USER\Software\Classes\.pwd]
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.pwd]
+
+
+;
+; set root extension classes
+;
+
+; asm
+[HKEY_CLASSES_ROOT\.asm]
+@="SolidEdge.AssemblyDocument"
+
+[HKEY_CLASSES_ROOT\.asm\shellex]
+
+[HKEY_CLASSES_ROOT\.asm\shellex\{8895B1C6-B41F-4C1C-A562-0D564250836F}]
+@="{52E07B83-5E67-4CBB-832D-67F599D4D086}"
+
+[HKEY_CLASSES_ROOT\.asm\shellex\{BB2E617C-0920-11d1-9A0B-00C04FC2D6C1}]
+@="{D5E1D8F7-7570-490B-93A4-3B106BAB13AD}"
+
+[HKEY_CLASSES_ROOT\.asm\SolidEdge.AssemblyDocument]
+
+[HKEY_CLASSES_ROOT\.asm\SolidEdge.AssemblyDocument\ShellNew]
+
+; dft
+[HKEY_CLASSES_ROOT\.dft]
+@="SolidEdge.DraftDocument"
+
+[HKEY_CLASSES_ROOT\.dft\shellex]
+
+[HKEY_CLASSES_ROOT\.dft\shellex\{8895B1C6-B41F-4C1C-A562-0D564250836F}]
+@="{52E07B83-5E67-4CBB-832D-67F599D4D086}"
+
+[HKEY_CLASSES_ROOT\.dft\shellex\{BB2E617C-0920-11d1-9A0B-00C04FC2D6C1}]
+@="{D5E1D8F7-7570-490B-93A4-3B106BAB13AD}"
+
+[HKEY_CLASSES_ROOT\.dft\SolidEdge.DraftDocument]
+
+[HKEY_CLASSES_ROOT\.dft\SolidEdge.DraftDocument\ShellNew]
+
+; par
+[HKEY_CLASSES_ROOT\.par]
+@="SolidEdge.PartDocument"
+
+[HKEY_CLASSES_ROOT\.par\ShellEx]
+
+[HKEY_CLASSES_ROOT\.par\ShellEx\{8895B1C6-B41F-4C1C-A562-0D564250836F}]
+@="{52E07B83-5E67-4CBB-832D-67F599D4D086}"
+
+[HKEY_CLASSES_ROOT\.par\ShellEx\{BB2E617C-0920-11d1-9A0B-00C04FC2D6C1}]
+@="{D5E1D8F7-7570-490B-93A4-3B106BAB13AD}"
+
+[HKEY_CLASSES_ROOT\.par\SolidEdge.PartDocument]
+
+[HKEY_CLASSES_ROOT\.par\SolidEdge.PartDocument\ShellNew]
+
+; psm
+[HKEY_CLASSES_ROOT\.psm]
+@="SolidEdge.SheetMetalDocument"
+
+[HKEY_CLASSES_ROOT\.psm\shellex]
+
+[HKEY_CLASSES_ROOT\.psm\shellex\{8895B1C6-B41F-4C1C-A562-0D564250836F}]
+@="{52E07B83-5E67-4CBB-832D-67F599D4D086}"
+
+[HKEY_CLASSES_ROOT\.psm\shellex\{BB2E617C-0920-11d1-9A0B-00C04FC2D6C1}]
+@="{D5E1D8F7-7570-490B-93A4-3B106BAB13AD}"
+
+[HKEY_CLASSES_ROOT\.psm\SolidEdge.SheetMetalDocument]
+
+[HKEY_CLASSES_ROOT\.psm\SolidEdge.SheetMetalDocument\ShellNew]
+
+; pwd
+[HKEY_CLASSES_ROOT\.pwd]
+@="SolidEdge.WeldmentDocument"
+
+[HKEY_CLASSES_ROOT\.pwd\shellex]
+
+[HKEY_CLASSES_ROOT\.pwd\shellex\{8895B1C6-B41F-4C1C-A562-0D564250836F}]
+@="{52E07B83-5E67-4CBB-832D-67F599D4D086}"
+
+[HKEY_CLASSES_ROOT\.pwd\shellex\{BB2E617C-0920-11d1-9A0B-00C04FC2D6C1}]
+@="{D5E1D8F7-7570-490B-93A4-3B106BAB13AD}"
+
+[HKEY_CLASSES_ROOT\.pwd\SolidEdge.WeldmentDocument]
+
+[HKEY_CLASSES_ROOT\.pwd\SolidEdge.WeldmentDocument\ShellNew]
+
+
+;
+; set root document classes
+;
+
+; asm
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument]
+@="Solid Edge Assembly Document"
+"InfoTip"="prop:System.ItemType;System.Author;SolidEdge.Material;SolidEdge.StatusInfo"
+"FullDetails"="prop:System.PropGroup.Description;System.Title;System.Subject;System.Author;System.Document.Manager;System.Company;System.Category;System.Comment;System.Document.Template;System.Keywords;SolidEdge.Material;System.PropGroup.FileSystem;System.ItemNameDisplay;System.ItemType;System.ItemFolderPathDisplay;System.Size;System.ApplicationName;System.DateCreated;System.DateModified;System.DateAccessed;System.FileAttributes;System.OfflineAvailability;System.OfflineStatus;System.SharedWith;System.FileOwner;System.ComputerName;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project;SolidEdge.Status;SolidEdge.StatusUser;SolidEdge.StatusUserDisplay;SolidEdge.StatusDate;System.Document.LastAuthor;SolidEdge.SavingApp"
+"PreviewDetails"="prop:System.Title;prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"PreviewTitle"="prop:System.Title;System.ItemType;SolidEdge.Material;SolidEdge.StatusInfo"
+"TileInfo"="prop:System.DateChanged;System.Author;SolidEdge.Material;SolidEdge.StatusInfo;System.Size;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"ExtendedTileInfo"="prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\CLSID]
+@="{00C6BF00-483B-11CE-951A-08003601BE52}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\DefaultIcon]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe,2"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\protocol]
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\protocol\StdFileEditing]
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\protocol\StdFileEditing\server]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell]
+@="Open"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Open]
+@="&Open with Solid Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Open\command]
+@="\"C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\Edge.exe\" \"%1\""
+"command"=hex(7):78,00,4b,00,6c,00,66,00,4a,00,31,00,7e,00,3d,00,2e,00,3d,00,\
+  6d,00,2a,00,50,00,2d,00,64,00,24,00,72,00,77,00,6b,00,58,00,45,00,58,00,45,\
+  00,43,00,55,00,54,00,41,00,42,00,4c,00,45,00,53,00,3e,00,6f,00,42,00,6f,00,\
+  2a,00,46,00,64,00,67,00,4f,00,65,00,3f,00,41,00,6d,00,79,00,26,00,69,00,64,\
+  00,40,00,66,00,75,00,29,00,20,00,22,00,25,00,31,00,22,00,00,00,00,00
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Open\ddeexec]
+@="[Open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Open\ddeexec\application]
+@="Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Open\ddeexec\topic]
+@="System"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Open As]
+@="Open As..."
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Open As\command]
+@="Edge.EXE \"%1\" \"-OpenAs\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Open As\ddeexec]
+@="[OpenAs(\"%1\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Reports]
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Reports\command]
+@="\"C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\report.exe\" %1"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Revision Manager]
+@="Open with Design &Manager"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Revision Manager\command]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\DesMgr.EXE \"%1\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Revision Manager\ddeexec]
+@="[open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shell\Solid Edge]
+"SubCommands"="SolidEdge.BrokenLink;SolidEdge.PackNGo;SolidEdge.Report"
+"SeparatorAfter"="Solid Edge"
+"MUIVerb"="Solid Edge"
+"CommandFlags"=dword:00000040
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shellex]
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shellex\PropertySheetHandlers]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shellex\PropertySheetHandlers\1ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shellex\PropertySheetHandlers\1StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shellex\PropertySheetHandlers\2ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.AssemblyDocument\shellex\PropertySheetHandlers\2StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+; dft
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument]
+@="Solid Edge Draft Document"
+"InfoTip"="prop:System.ItemType;System.Author;SolidEdge.Material;SolidEdge.StatusInfo"
+"FullDetails"="prop:System.PropGroup.Description;System.Title;System.Subject;System.Author;System.Document.Manager;System.Company;System.Category;System.Comment;System.Document.Template;System.Keywords;SolidEdge.Material;System.PropGroup.FileSystem;System.ItemNameDisplay;System.ItemType;System.ItemFolderPathDisplay;System.Size;System.ApplicationName;System.DateCreated;System.DateModified;System.DateAccessed;System.FileAttributes;System.OfflineAvailability;System.OfflineStatus;System.SharedWith;System.FileOwner;System.ComputerName;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project;SolidEdge.Status;SolidEdge.StatusUser;SolidEdge.StatusUserDisplay;SolidEdge.StatusDate;System.Document.LastAuthor;SolidEdge.SavingApp"
+"PreviewDetails"="prop:System.Title;prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"PreviewTitle"="prop:System.Title;System.ItemType;SolidEdge.Material;SolidEdge.StatusInfo"
+"TileInfo"="prop:System.DateChanged;System.Author;SolidEdge.Material;SolidEdge.StatusInfo;System.Size;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"ExtendedTileInfo"="prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\CLSID]
+@="{016B11FB-CDC0-11CE-A035-08003601E53B}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\DefaultIcon]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe,5"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\protocol]
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\protocol\StdFileEditing]
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\protocol\StdFileEditing\server]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell]
+@="Open"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Open]
+@="&Open with Solid Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Open\command]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe \"%1\""
+"command"=hex(7):78,00,4b,00,6c,00,66,00,4a,00,31,00,7e,00,3d,00,2e,00,3d,00,\
+  6d,00,2a,00,50,00,2d,00,64,00,24,00,72,00,77,00,6b,00,58,00,45,00,58,00,45,\
+  00,43,00,55,00,54,00,41,00,42,00,4c,00,45,00,53,00,3e,00,6f,00,42,00,6f,00,\
+  2a,00,46,00,64,00,67,00,4f,00,65,00,3f,00,41,00,6d,00,79,00,26,00,69,00,64,\
+  00,40,00,66,00,75,00,29,00,20,00,22,00,25,00,31,00,22,00,00,00,00,00
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Open\ddeexec]
+@="[open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Open\ddeexec\application]
+@="Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Open\ddeexec\topic]
+@="System"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Revision Manager]
+@="Open with Design &Manager"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Revision Manager\command]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\DesMgr.EXE \"%1\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Revision Manager\ddeexec]
+@="[open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shell\Solid Edge]
+"SeparatorAfter"="Solid Edge"
+"SubCommands"="SolidEdge.BrokenLink;SolidEdge.PackNGo"
+"MUIVerb"="Solid Edge"
+"CommandFlags"=dword:00000040
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shellex]
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shellex\PropertySheetHandlers]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shellex\PropertySheetHandlers\1ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shellex\PropertySheetHandlers\1StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shellex\PropertySheetHandlers\2ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.DraftDocument\shellex\PropertySheetHandlers\2StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+; par
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument]
+@="Solid Edge Part Document"
+"InfoTip"="prop:System.ItemType;System.Author;SolidEdge.Material;SolidEdge.StatusInfo"
+"FullDetails"="prop:System.PropGroup.Description;System.Title;System.Subject;System.Author;System.Document.Manager;System.Company;System.Category;System.Comment;System.Document.Template;System.Keywords;SolidEdge.Material;System.PropGroup.FileSystem;System.ItemNameDisplay;System.ItemType;System.ItemFolderPathDisplay;System.Size;System.ApplicationName;System.DateCreated;System.DateModified;System.DateAccessed;System.FileAttributes;System.OfflineAvailability;System.OfflineStatus;System.SharedWith;System.FileOwner;System.ComputerName;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project;SolidEdge.Status;SolidEdge.StatusUser;SolidEdge.StatusUserDisplay;SolidEdge.StatusDate;System.Document.LastAuthor;SolidEdge.SavingApp"
+"PreviewDetails"="prop:System.Title;prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"PreviewTitle"="prop:System.Title;System.ItemType;SolidEdge.Material;SolidEdge.StatusInfo"
+"TileInfo"="prop:System.DateChanged;System.Author;SolidEdge.Material;SolidEdge.StatusInfo;System.Size;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"ExtendedTileInfo"="prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\CLSID]
+@="{23C52E80-4698-11CE-B307-0800363A1E02}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\DefaultIcon]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe,7"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\protocol]
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\protocol\StdFileEditing]
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\protocol\StdFileEditing\server]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell]
+@="Open"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Open]
+@="&Open with Solid Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Open\command]
+@="\"C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\Edge.exe\" \"%1\""
+"command"=hex(7):78,00,4b,00,6c,00,66,00,4a,00,31,00,7e,00,3d,00,2e,00,3d,00,\
+  6d,00,2a,00,50,00,2d,00,64,00,24,00,72,00,77,00,6b,00,58,00,45,00,58,00,45,\
+  00,43,00,55,00,54,00,41,00,42,00,4c,00,45,00,53,00,3e,00,6f,00,42,00,6f,00,\
+  2a,00,46,00,64,00,67,00,4f,00,65,00,3f,00,41,00,6d,00,79,00,26,00,69,00,64,\
+  00,40,00,66,00,75,00,29,00,20,00,22,00,25,00,31,00,22,00,00,00,00,00
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Open\ddeexec]
+@="[open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Open\ddeexec\application]
+@="Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Open\ddeexec\topic]
+@="System"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Open As]
+@="Open As..."
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Open As\command]
+@="Edge.EXE \"%1\" \"-OpenAs\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Open As\ddeexec]
+@="[OpenAs(\"%1\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Revision Manager]
+@="Open with Design &Manager"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Revision Manager\command]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\DesMgr.EXE \"%1\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Revision Manager\ddeexec]
+@="[open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shell\Solid Edge]
+"SeparatorAfter"="Solid Edge"
+"SubCommands"="SolidEdge.BrokenLink;SolidEdge.PackNGo"
+"CommandFlags"=dword:00000040
+"MUIVerb"="Solid Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shellex]
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shellex\PropertySheetHandlers]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shellex\PropertySheetHandlers\1ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shellex\PropertySheetHandlers\1StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shellex\PropertySheetHandlers\2ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.PartDocument\shellex\PropertySheetHandlers\2StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+; psm
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument]
+@="Solid Edge Sheet Metal Document"
+"InfoTip"="prop:System.ItemType;System.Author;SolidEdge.Material;SolidEdge.StatusInfo"
+"FullDetails"="prop:System.PropGroup.Description;System.Title;System.Subject;System.Author;System.Document.Manager;System.Company;System.Category;System.Comment;System.Document.Template;System.Keywords;SolidEdge.Material;System.PropGroup.FileSystem;System.ItemNameDisplay;System.ItemType;System.ItemFolderPathDisplay;System.Size;System.ApplicationName;System.DateCreated;System.DateModified;System.DateAccessed;System.FileAttributes;System.OfflineAvailability;System.OfflineStatus;System.SharedWith;System.FileOwner;System.ComputerName;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project;SolidEdge.Status;SolidEdge.StatusUser;SolidEdge.StatusUserDisplay;SolidEdge.StatusDate;System.Document.LastAuthor;SolidEdge.SavingApp"
+"PreviewDetails"="prop:System.Title;prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"PreviewTitle"="prop:System.Title;System.ItemType;SolidEdge.Material;SolidEdge.StatusInfo"
+"TileInfo"="prop:System.DateChanged;System.Author;SolidEdge.Material;SolidEdge.StatusInfo;System.Size;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"ExtendedTileInfo"="prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\CLSID]
+@="{DD8522E0-2375-11D0-AC05-080036FD1802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\DefaultIcon]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe,1"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\protocol]
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\protocol\StdFileEditing]
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\protocol\StdFileEditing\server]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell]
+@="Open"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Open]
+@="&Open with Solid Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Open\command]
+@="\"C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\Edge.exe\" \"%1\""
+"command"=hex(7):78,00,4b,00,6c,00,66,00,4a,00,31,00,7e,00,3d,00,2e,00,3d,00,\
+  6d,00,2a,00,50,00,2d,00,64,00,24,00,72,00,77,00,6b,00,58,00,45,00,58,00,45,\
+  00,43,00,55,00,54,00,41,00,42,00,4c,00,45,00,53,00,3e,00,6f,00,42,00,6f,00,\
+  2a,00,46,00,64,00,67,00,4f,00,65,00,3f,00,41,00,6d,00,79,00,26,00,69,00,64,\
+  00,40,00,66,00,75,00,29,00,20,00,22,00,25,00,31,00,22,00,00,00,00,00
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Open\ddeexec]
+@="[Open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Open\ddeexec\application]
+@="Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Open\ddeexec\topic]
+@="System"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Open As]
+@="Open As..."
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Open As\command]
+@="Edge.EXE \"%1\" \"-OpenAs\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Open As\ddeexec]
+@="[OpenAs(\"%1\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Revision Manager]
+@="Open with Design &Manager"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Revision Manager\command]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\DesMgr.EXE \"%1\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Revision Manager\ddeexec]
+@="[open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shell\Solid Edge]
+"SeparatorAfter"="Solid Edge"
+"CommandFlags"=dword:00000040
+"MUIVerb"="Solid Edge"
+"SubCommands"="SolidEdge.BrokenLink;SolidEdge.PackNGo"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shellex]
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shellex\PropertySheetHandlers]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shellex\PropertySheetHandlers\1ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shellex\PropertySheetHandlers\1StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shellex\PropertySheetHandlers\2ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.SheetMetalDocument\shellex\PropertySheetHandlers\2StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+; pwd 
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument]
+@="Solid Edge Weldment Document"
+"InfoTip"="prop:System.ItemType;System.Author;SolidEdge.Material;SolidEdge.StatusInfo"
+"FullDetails"="prop:System.PropGroup.Description;System.Title;System.Subject;System.Author;System.Document.Manager;System.Company;System.Category;System.Comment;System.Document.Template;System.Keywords;SolidEdge.Material;System.PropGroup.FileSystem;System.ItemNameDisplay;System.ItemType;System.ItemFolderPathDisplay;System.Size;System.ApplicationName;System.DateCreated;System.DateModified;System.DateAccessed;System.FileAttributes;System.OfflineAvailability;System.OfflineStatus;System.SharedWith;System.FileOwner;System.ComputerName;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project;SolidEdge.Status;SolidEdge.StatusUser;SolidEdge.StatusUserDisplay;SolidEdge.StatusDate;System.Document.LastAuthor;SolidEdge.SavingApp"
+"PreviewDetails"="prop:System.Title;prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"PreviewTitle"="prop:System.Title;System.ItemType;SolidEdge.Material;SolidEdge.StatusInfo"
+"TileInfo"="prop:System.DateChanged;System.Author;SolidEdge.Material;SolidEdge.StatusInfo;System.Size;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+"ExtendedTileInfo"="prop:System.DateChanged;System.Author;System.Keywords;SolidEdge.Material;SolidEdge.StatusInfo;System.Comment;System.Size;System.ItemFolderPathDisplay;System.DateCreated;SolidEdge.DocumentNumber;SolidEdge.Revision;SolidEdge.Project"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\CLSID]
+@="{98CCDF9C-213B-11D4-B64C-00C04F79B2BF}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\DefaultIcon]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe,11"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\Insertable]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\protocol]
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\protocol\StdFileEditing]
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\protocol\StdFileEditing\server]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\edge.exe"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell]
+@="Open"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Open]
+@="&Open with Solid Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Open\command]
+@="\"C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\Edge.exe\" \"%1\""
+"command"=hex(7):78,00,4b,00,6c,00,66,00,4a,00,31,00,7e,00,3d,00,2e,00,3d,00,\
+  6d,00,2a,00,50,00,2d,00,64,00,24,00,72,00,77,00,6b,00,58,00,45,00,58,00,45,\
+  00,43,00,55,00,54,00,41,00,42,00,4c,00,45,00,53,00,3e,00,6f,00,42,00,6f,00,\
+  2a,00,46,00,64,00,67,00,4f,00,65,00,3f,00,41,00,6d,00,79,00,26,00,69,00,64,\
+  00,40,00,66,00,75,00,29,00,20,00,22,00,25,00,31,00,22,00,00,00,00,00
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Open\ddeexec]
+@="[open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Open\ddeexec\application]
+@="Edge"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Open\ddeexec\topic]
+@="System"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Open As]
+@="Open As..."
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Open As\command]
+@="Edge.EXE \"%1\" \"-OpenAs\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Open As\ddeexec]
+@="[OpenAs(\"%1\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Revision Manager]
+@="Open with Design &Manager"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Revision Manager\command]
+@="C:\\Program Files\\Siemens\\Solid Edge 2022\\Program\\DesMgr.EXE \"%1\""
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Revision Manager\ddeexec]
+@="[open(\"%1\"\"%2\"\"%3\")]"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shell\Solid Edge]
+"MUIVerb"="Solid Edge"
+"SeparatorAfter"="Solid Edge"
+"SubCommands"="SolidEdge.BrokenLink;SolidEdge.PackNGo"
+"CommandFlags"=dword:00000040
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shellex]
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shellex\PropertySheetHandlers]
+@=""
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shellex\PropertySheetHandlers\1StatusPage]
+@="{1CD96FB1-0767-11D0-A21A-08003611E802}"
+
+[HKEY_CLASSES_ROOT\SolidEdge.WeldmentDocument\shellex\PropertySheetHandlers\2ProjectPage]
+@="{1CD96FB2-0767-11D0-A21A-08003611E802}"
