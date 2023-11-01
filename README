@@ -26,6 +26,8 @@ clear_solid_edge_mru_list_recent.reg - reset the Solid Edge MRU list under the R
 
 clear_solid_edge_mru_list_screen.reg - reset the Solid Edge MRU list on the start screen
 
+enable_se_file_locking - enable the Solid Edge file locking .selock file
+
 ForceSolidEdgeCrash.ps1 - force Solid Edge to crash with a crashlog
 
 open_dwg_in_solid_edge.reg - open .dwg files in single instance of Solid Edge 
@@ -47,6 +49,12 @@ reset_solid_edge_extensions_SE2019 - reset the default Solid Edge SE2019 file ex
 reset_solid_edge_extensions_SE2020 - reset the default Solid Edge SE2020 file extensions
 
 reset_solid_edge_extensions_SE2021 - reset the default Solid Edge SE2021 file extensions
+
+reset_solid_edge_extensions_SE2022 - reset the default Solid Edge SE2022 file extensions
+
+reset_solid_edge_extensions_SE2023 - reset the default Solid Edge SE2023 file extensions
+
+reset_solid_edge_extensions_SE2024 - reset the default Solid Edge SE2024 file extensions
 
 reset_solid_edge_extensions_ST8 - reset the default Solid Edge ST8 file extensions
 
@@ -99,6 +107,12 @@ SolidEdgeSetLanguage_SE2019.cmd - set Solid Edge SE2019 UI language
 SolidEdgeSetLanguage_SE2020.cmd - set Solid Edge SE2020 UI language 
 
 SolidEdgeSetLanguage_SE2021.cmd - set Solid Edge SE2021 UI language 
+
+SolidEdgeSetLanguage_SE2022.cmd - set Solid Edge SE2022 UI language 
+
+SolidEdgeSetLanguage_SE2023.cmd - set Solid Edge SE2023 UI language 
+
+SolidEdgeSetLanguage_SE2024.cmd - set Solid Edge SE2024 UI language 
 
 superellipse.par - generate modifiable superellipse geometry using embedded table by curves 
 

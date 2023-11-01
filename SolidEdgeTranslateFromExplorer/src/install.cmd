@@ -66,11 +66,11 @@ xcopy "%SOFTWARE_DIR%\start_menu\*" "%MENU_DIR%" /h /e /i /r /y /d
 cls
 
 rem install our registry shortcuts
-regedit /s "%SOFTWARE_DIR%\registry\install_asm_context_menu.reg"
-regedit /s "%SOFTWARE_DIR%\registry\install_dft_context_menu.reg"
-regedit /s "%SOFTWARE_DIR%\registry\install_directory_context_menu.reg"
-regedit /s "%SOFTWARE_DIR%\registry\install_par_context_menu.reg"
-regedit /s "%SOFTWARE_DIR%\registry\install_psm_context_menu.reg"
+rem regedit /s "%SOFTWARE_DIR%\registry\install_asm_context_menu.reg"
+rem regedit /s "%SOFTWARE_DIR%\registry\install_dft_context_menu.reg"
+rem regedit /s "%SOFTWARE_DIR%\registry\install_directory_context_menu.reg"
+rem regedit /s "%SOFTWARE_DIR%\registry\install_par_context_menu.reg"
+rem regedit /s "%SOFTWARE_DIR%\registry\install_psm_context_menu.reg"
 cls
 
 rem install should be complete so open our start menu and then exit

@@ -29,12 +29,13 @@
 #
 # ---------------------------------------------------------------------
 #
-# 07/08/2017  merritt  initial release
-# 08/08/2017  merritt  added manual exit
-# 08/08/2017  merritt  added code to always keep script window on top
-# 31/07/2018  merritt  updated to accommodate changes with SE2019 
-# 03/08/2018  merritt  added checks to exclude auxiliary software when
-#                      checking for installed software 
+# 07/08/2017 merritt initial release
+# 08/08/2017 merritt added manual exit
+# 08/08/2017 merritt added code to always keep script window on top
+# 31/07/2018 merritt updated to accommodate changes with SE2019 
+# 03/08/2018 merritt added checks to exclude auxiliary software when
+#                    checking for installed software 
+# 03/04/2023 merritt added additional portfolio prodcuts to skip 
 #
 
 <#
@@ -123,7 +124,19 @@ foreach ($item in $Software)
     {
         continue
     }
+	
+	# skip CAM Pro
+    if ($item.Comments -like '*NX*')
+    {
+        continue
+    }
 
+	# skip Visual Studio Addin
+    if ($item.Comments -like '')
+    {
+        continue
+    }
+		
     # get major versions and remove characters 107 -> 7, 117 -> 17
     $VersionMajor = [string]$item.VersionMajor
 
