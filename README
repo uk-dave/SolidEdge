@@ -28,6 +28,8 @@ clear_solid_edge_mru_list_screen.reg - reset the Solid Edge MRU list on the star
 
 enable_se_file_locking - enable the Solid Edge file locking .selock file
 
+create_se_extensions_registry_reset - create Solid Edge file extensions registry reset script
+
 ForceSolidEdgeCrash.ps1 - force Solid Edge to crash with a crashlog
 
 open_dwg_in_solid_edge.reg - open .dwg files in single instance of Solid Edge 
