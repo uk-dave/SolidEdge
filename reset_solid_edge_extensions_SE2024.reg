@@ -22,7 +22,7 @@ Windows Registry Editor Version 5.00
 ; For a single instance of Solid Edge.
 ;
 ; This script assumes the default Solid Edge install location - 
-; C:\Program Files\Siemens\Solid Edge 204\Program\
+; C:\Program Files\Siemens\Solid Edge 2024\Program\
 ;
 ; If you have installed to a different location perform a find and 
 ; replace on the following string (note the double back slashes) -
