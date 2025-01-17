@@ -58,6 +58,8 @@ reset_solid_edge_extensions_SE2023 - reset the default Solid Edge SE2023 file ex
 
 reset_solid_edge_extensions_SE2024 - reset the default Solid Edge SE2024 file extensions
 
+reset_solid_edge_extensions_SE2025 - reset the default Solid Edge SE2025 file extensions
+
 reset_solid_edge_extensions_ST8 - reset the default Solid Edge ST8 file extensions
 
 reset_solid_edge_extensions_ST9 - reset the default Solid Edge ST9 file extensions
